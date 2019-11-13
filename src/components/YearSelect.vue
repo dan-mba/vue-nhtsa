@@ -1,0 +1,37 @@
+<template>
+  <select :value=value @input="$emit('input',$event.target.value)">
+    <option value="">Year:</option>
+    <option v-for="year in years" :key="year" :value="year">{{year}}</option>
+  </select>
+</template>
+
+<script>
+import NHTSA from '../constants/endpoints';
+import axios from 'axios-jsonp-pro';
+
+export default {
+  name: 'YearSelect',
+  props: {
+    value: String
+  },
+  data (){
+    return {
+      years: []
+    }
+  },
+  mounted (){
+    axios
+      .jsonp(NHTSA.endpoint+NHTSA.dataType)
+      .then(response => {
+        this.years = response.Results.map(result => result.ModelYear)
+      })
+      .catch(error => {
+        console.log(error);
+      })
+  }
+}
+</script>
+
+<style>
+
+</style>

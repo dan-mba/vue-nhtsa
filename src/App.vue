@@ -1,17 +1,75 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <YearSelect v-model="year"></YearSelect>
+    <MakeSelect v-model="make" :year="year"></MakeSelect>
+    <ModelSelect v-model="model" :year="year" :make="make"></ModelSelect>
+    <DescSelect v-model="vehId" :year="year" :make="make" :model="model"></DescSelect>
+    <div v-if="vehicle">
+      <img :src="vehicle.img">
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import NHTSA from './constants/endpoints';
+import axios from 'axios-jsonp-pro';
+import YearSelect from './components/YearSelect';
+import MakeSelect from './components/MakeSelect';
+import ModelSelect from './components/ModelSelect';
+import DescSelect from './components/DescSelect';
 
 export default {
   name: 'app',
   components: {
-    HelloWorld
+    YearSelect,
+    MakeSelect,
+    ModelSelect,
+    DescSelect,
+  },
+  data() {
+    return {
+      year: "",
+      make: "",
+      model: "",
+      vehId: "",
+      vehicle: null
+    }
+  },
+  methods: {
+    getData: function (){
+      if(this.vehId === "") {
+        this.vehicle = null;
+        return;
+      }
+      axios
+        .jsonp(NHTSA.endpoint+'/vehicleid/'+this.vehId+NHTSA.dataType)
+        .then(response => {
+          const data = response.Results[0];
+          this.vehicle = {
+            img: data?.VehiclePicture,
+          };
+        })
+        .catch(error => {
+          console.log(error);
+        })
+    }
+  },
+  watch: {
+    year: function (){
+      this.make="";
+      this.model="";
+      this.vehId="";
+    },
+    make: function (){
+      this.model="";
+      this.vehId="";
+    },
+    model: function (){
+      this.vehId="";
+    },
+    vehId: function (){
+      this.getData();
+    }
   }
 }
 </script>
