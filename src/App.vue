@@ -1,22 +1,24 @@
 <template>
   <div id="app">
-    <YearSelect v-model="year"></YearSelect>
-    <MakeSelect v-model="make" :year="year"></MakeSelect>
-    <ModelSelect v-model="model" :year="year" :make="make"></ModelSelect>
-    <DescSelect v-model="vehId" :year="year" :make="make" :model="model"></DescSelect>
-    <div v-if="vehicle">
-      <img :src="vehicle.img">
+    <h1>NHTSA Safety Ratings Database</h1>
+    <div class="select-box">
+      <YearSelect v-model="year"></YearSelect>
+      <MakeSelect v-model="make" :year="year"></MakeSelect>
+      <ModelSelect v-model="model" :year="year" :make="make"></ModelSelect>
+      <DescSelect v-model="vehId" :year="year" :make="make" :model="model"></DescSelect>
     </div>
+    <DisplayVehicle :vehicle="vehicle"></DisplayVehicle>
   </div>
 </template>
 
 <script>
-import NHTSA from './constants/endpoints';
-import axios from 'axios-jsonp-pro';
-import YearSelect from './components/YearSelect';
-import MakeSelect from './components/MakeSelect';
-import ModelSelect from './components/ModelSelect';
-import DescSelect from './components/DescSelect';
+import NHTSA from './constants/endpoints'
+import axios from 'axios-jsonp-pro'
+import YearSelect from './components/YearSelect'
+import MakeSelect from './components/MakeSelect'
+import ModelSelect from './components/ModelSelect'
+import DescSelect from './components/DescSelect'
+import DisplayVehicle from './components/DisplayVehicle'
 
 export default {
   name: 'app',
@@ -25,6 +27,7 @@ export default {
     MakeSelect,
     ModelSelect,
     DescSelect,
+    DisplayVehicle,
   },
   data() {
     return {
@@ -46,8 +49,37 @@ export default {
         .then(response => {
           const data = response.Results[0];
           this.vehicle = {
-            img: data?.VehiclePicture,
+            description: data.VehicleDescription,
+            picture: data.hasOwnProperty('VehiclePicture') ?
+              data.VehiclePicture : "",
+            overallRating: parseInt(data.OverallRating,10),
+            rolloverRating: parseInt(data.RolloverRating, 10),
+            rolloverPossibility: data.RolloverPossibility,
+            nhtsaVars: Object.keys(data).filter(key => key.indexOf("NHTSA") === 0)
+                        .map(key => key.match(/[A-Z][a-z]+/g).join(" ") + ': ' + data[key]),
+            complaints: data.ComplaintsCount,
+            recalls: data.RecallsCount,
+            investigations: data.InvestigationCount,
+            crashRatings: data.FrontCrashDriversideRating != "Not Rated"
           };
+          if (this.vehicle.crashRatings) {
+            this.vehicle = {
+              frontCrashPic: data.hasOwnProperty('FrontCrashPicture') ?
+                data.FrontCrashPicture : "",
+              frontCrashRating: parseInt(data.OverallFrontCrashRating,10),
+              driverSideRating: parseInt(data.FrontCrashDriversideRating,10),
+              passengerSideRating: parseInt(data.FrontCrashPassengersideRating,10),
+              sideCrashPicture: data.hasOwnProperty('SideCrashPicture') ?
+                data.SideCrashPicture : "",
+              sideCrashRating: parseInt(data.OverallSideCrashRating,10),
+              sideDriverSideRating: parseInt(data.SideCrashDriversideRating,10),
+              sidePassengerSideRating: parseInt(data.SideCrashPassengersideRating,10),
+              sidePolePicture: data.hasOwnProperty('SidePolePicture') ?
+                data.SidePolePicture : "",
+              sidePoleCrashRating: parseInt(data.SidePoleCrashRating,10),
+              ...this.vehicle
+            };
+          }
         })
         .catch(error => {
           console.log(error);
@@ -75,12 +107,16 @@ export default {
 </script>
 
 <style>
+h1 {
+  font-size: 2em;
+  color: #303030;
+  margin: 10px 0;
+}
+
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 </style>

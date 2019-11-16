@@ -1,13 +1,15 @@
 <template>
-  <select :value=value @input="$emit('input',$event.target.value)">
-    <option value="">Model:</option>
-    <option v-for="model in models" :key="model.name" :value="model.value">{{model.name}}</option>
-  </select>
+  <div class="select-div" style="flex:0 0 320px;">
+    <select :value=value @input="$emit('input',$event.target.value)">
+      <option value="">Model:</option>
+      <option v-for="model in models" :key="model.name" :value="model.value">{{model.name}}</option>
+    </select>
+  </div>
 </template>
 
 <script>
-import NHTSA from '../constants/endpoints';
-import axios from 'axios-jsonp-pro';
+import NHTSA from '../constants/endpoints'
+import axios from 'axios-jsonp-pro'
 
 export default {
   name: 'ModelSelect',

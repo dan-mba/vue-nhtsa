@@ -1,13 +1,15 @@
 <template>
-  <select :value=value @input="$emit('input',$event.target.value)">
-    <option value="">Year:</option>
-    <option v-for="year in years" :key="year" :value="year">{{year}}</option>
-  </select>
+  <div class="select-div" style="flex:0 0 100px;">
+    <select :value=value @input="$emit('input',$event.target.value)">
+      <option value="">Year:</option>
+      <option v-for="year in years" :key="year" :value="year">{{year}}</option>
+    </select>
+  </div>
 </template>
 
 <script>
-import NHTSA from '../constants/endpoints';
-import axios from 'axios-jsonp-pro';
+import NHTSA from '../constants/endpoints'
+import axios from 'axios-jsonp-pro'
 
 export default {
   name: 'YearSelect',
