@@ -4,6 +4,7 @@
       <option value="">Make:</option>
       <option v-for="make in makes" :key="make.name" :value="make.value">{{make.name}}</option>
     </select>
+    <font-awesome-icon :icon="['fas','chevron-down']" class="chevron"></font-awesome-icon>
   </div>
 </template>
 

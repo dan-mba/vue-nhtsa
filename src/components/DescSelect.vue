@@ -10,6 +10,7 @@
         {{description.name}}
       </option>
     </select>
+    <font-awesome-icon :icon="['fas','chevron-down']" class="chevron"></font-awesome-icon>
   </div>
 </template>
 

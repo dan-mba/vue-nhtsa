@@ -4,6 +4,7 @@
       <option value="">Year:</option>
       <option v-for="year in years" :key="year" :value="year">{{year}}</option>
     </select>
+    <font-awesome-icon :icon="['fas','chevron-down']" class="chevron"></font-awesome-icon>
   </div>
 </template>
 

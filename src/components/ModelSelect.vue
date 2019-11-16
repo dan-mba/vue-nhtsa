@@ -4,6 +4,7 @@
       <option value="">Model:</option>
       <option v-for="model in models" :key="model.name" :value="model.value">{{model.name}}</option>
     </select>
+    <font-awesome-icon :icon="['fas','chevron-down']" class="chevron"></font-awesome-icon>
   </div>
 </template>
 
