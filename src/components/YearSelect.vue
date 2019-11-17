@@ -1,10 +1,13 @@
 <template>
-  <div class="select-div" style="flex:0 0 100px;">
+  <div id="year" class="select-div">
     <select :value=value @input="$emit('input',$event.target.value)">
       <option value="">Year:</option>
-      <option v-for="year in years" :key="year" :value="year">{{year}}</option>
+      <option v-for="year in years" :key="year" :value="year">
+        {{year}}
+      </option>
     </select>
-    <font-awesome-icon :icon="['fas','chevron-down']" class="chevron"></font-awesome-icon>
+    <font-awesome-icon :icon="['fas','chevron-down']" class="chevron">
+    </font-awesome-icon>
   </div>
 </template>
 
@@ -36,5 +39,7 @@ export default {
 </script>
 
 <style>
-
+#year {
+  flex: 0 0 100px;
+}
 </style>

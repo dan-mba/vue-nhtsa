@@ -1,10 +1,13 @@
 <template>
-  <div class="select-div" style="flex:0 0 230px;">
+  <div id="make" class="select-div">
     <select :value=value @input="$emit('input',$event.target.value)">
       <option value="">Make:</option>
-      <option v-for="make in makes" :key="make.name" :value="make.value">{{make.name}}</option>
+      <option v-for="make in makes" :key="make.name" :value="make.value">
+        {{make.name}}
+      </option>
     </select>
-    <font-awesome-icon :icon="['fas','chevron-down']" class="chevron"></font-awesome-icon>
+    <font-awesome-icon :icon="['fas','chevron-down']" class="chevron">
+    </font-awesome-icon>
   </div>
 </template>
 
@@ -48,5 +51,7 @@ export default {
 </script>
 
 <style>
-
+#make {
+  flex: 0 0 230px;
+}
 </style>

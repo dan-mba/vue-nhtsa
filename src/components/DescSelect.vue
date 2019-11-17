@@ -1,5 +1,5 @@
 <template>
-  <div class="select-div" style="flex:0 0 320px;">
+  <div id="desc" class="select-div">
     <select :value=value @input="$emit('input',$event.target.value)">
       <option value="">Vehicle Description:</option>
       <option 
@@ -10,7 +10,8 @@
         {{description.name}}
       </option>
     </select>
-    <font-awesome-icon :icon="['fas','chevron-down']" class="chevron"></font-awesome-icon>
+    <font-awesome-icon :icon="['fas','chevron-down']" class="chevron">
+    </font-awesome-icon>
   </div>
 </template>
 
@@ -79,5 +80,7 @@ export default {
 </script>
 
 <style>
-
+#desc {
+  flex: 0 0 320px;
+}
 </style>
