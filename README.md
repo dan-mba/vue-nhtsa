@@ -1,6 +1,4 @@
 # vue-nhtsa
-
-## Work In Progress
 App to access NHTSA Vehicle Safety Data
 
 ## Project setup
