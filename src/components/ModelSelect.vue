@@ -1,14 +1,15 @@
 <template>
-  <div id="model" class="select-div">
-    <select :value=value @input="$emit('input',$event.target.value)">
-      <option value="">Model:</option>
-      <option v-for="model in models" :key="model.name" :value="model.value">
-        {{model.name}}
-      </option>
-    </select>
-    <font-awesome-icon :icon="['fas','chevron-down']" class="chevron">
-    </font-awesome-icon>
-  </div>
+  <v-select
+    v-model="selected"
+    :value=value
+    label="Model"
+    :items="models"
+    class="model mx-1"
+    menu-props="dark"
+    dense
+    dark
+    solo
+  />
 </template>
 
 <script>
@@ -24,7 +25,8 @@ export default {
   },
   data (){
     return {
-      models: []
+      models: [],
+      selected: ""
     }
   },
   watch: {
@@ -33,6 +35,7 @@ export default {
         this.models=[];
         return;
       }
+      this.selected="";
       this.getData();
     },
     make: function (){
@@ -40,7 +43,11 @@ export default {
         this.models=[];
         return;
       }
+      this.selected="";
       this.getData();
+    },
+    selected: function() {
+      this.$emit('input', this.selected);
     }
   },
   methods: {
@@ -54,7 +61,7 @@ export default {
           this.models = response.Results.map(result => {
             return {
               value: result.Model.replace(/&/g,'_'),
-              name: result.Model
+              text: result.Model
             }
           })
         })
@@ -67,7 +74,7 @@ export default {
 </script>
 
 <style>
-#model {
-  flex: 0 0 320px;
+.v-input.model {
+  flex: 0 0 300px;
 }
 </style>
