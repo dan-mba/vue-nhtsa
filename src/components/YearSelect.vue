@@ -1,14 +1,15 @@
 <template>
-  <div id="year" class="select-div">
-    <select :value=value @input="$emit('input',$event.target.value)">
-      <option value="">Year:</option>
-      <option v-for="year in years" :key="year" :value="year">
-        {{year}}
-      </option>
-    </select>
-    <font-awesome-icon :icon="['fas','chevron-down']" class="chevron">
-    </font-awesome-icon>
-  </div>
+  <v-select
+    v-model="selected"
+    :value=value
+    label="Year"
+    :items="years"
+    class="year mx-1"
+    menu-props="dark"
+    dense
+    dark
+    solo
+  />
 </template>
 
 <script>
@@ -22,24 +23,30 @@ export default {
   },
   data (){
     return {
-      years: []
+      years: [],
+      selected: ""
     }
   },
   mounted (){
     axios
       .jsonp(NHTSA.endpoint+NHTSA.dataType)
       .then(response => {
-        this.years = response.Results.map(result => result.ModelYear)
+        this.years = response.Results.map(result => result.ModelYear);
       })
       .catch(error => {
         console.log(error);
       })
+  },
+  watch: {
+    selected: function(){
+      this.$emit('input', this.selected.toString());
+    }
   }
 }
 </script>
 
 <style>
-#year {
-  flex: 0 0 100px;
+.v-input.year {
+  flex: 0 0 90px;
 }
 </style>

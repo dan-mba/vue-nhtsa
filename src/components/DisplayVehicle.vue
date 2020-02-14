@@ -1,46 +1,75 @@
 <template>
-  <div v-if="vehicle" id="vehicle">
-    <h2> {{ vehicle.description }} </h2>
-    <div class="cols">
-      <div class="img-flex">
-        <img id="vehpic" :src="vehicle.picture" alt=" ">
-      </div>
-      <div>
-        <div>Overall Rating: <Stars :stars="vehicle.overallRating"/></div>
-        <div>Rollover Rating: <Stars :stars="vehicle.rolloverRating"/></div>
-        <div>Rollover Possibility: {{vehicle.rolloverPossibility | percent}}</div>
-        <div v-for="(feature, index) in vehicle.nhtsaVars" :key="index">{{feature}}</div>
-        <div>Complaints Count: {{vehicle.complaints}}</div>
-        <div>Recalls Count: {{vehicle.recalls}}</div>
-        <div>Investigations Count: {{vehicle.investigations}}</div>
-      </div>
-    </div>
-    <div v-if="vehicle.crashRatings" id="crash">
-      <h4>Crash Ratings</h4>
-      <div class="cols">
-        <div class="img-flex">
-          <img id="frcrashpic" :src="vehicle.frontCrashPic" alt=" ">
+  <v-container
+    v-if="vehicle"
+    id="vehicle"
+    fluid
+    grid-list-sm
+  >
+    <v-row justify="center" dense>
+      <v-col cols="12" class="mb-3">
+        <h2 class="blue-grey--text text--darken-4 display-1 text-center font-weight-bold mb-2">
+          {{ vehicle.description }}
+        </h2>
+        <img
+          v-if="vehicle.picture"
+          id="vehpic"
+          :src="vehicle.picture"
+          alt=" "
+          class="mx-auto d-block main-img"
+        />
+      </v-col>
+
+      <v-col v-if="main" cols="10" md="4">
+        <div class="main-card sm-card">
+          <div>Overall: <Stars :stars="vehicle.overallRating"/></div>
+          <div>Rollover: <Stars :stars="vehicle.rolloverRating"/></div>
+          <div>Rollover Possibility: {{vehicle.rolloverPossibility | percent}}</div>
         </div>
-        <div>
-          <div>Front Crash Rating: <Stars :stars="vehicle.frontCrashRating"/></div>
-          <div>Driver Side Rating: <Stars :stars="vehicle.driverSideRating"/></div>
-          <div>Passenger Side Rating: <Stars :stars="vehicle.passengerSideRating"/></div>
+      </v-col>
+      <v-col v-if="vehicle.nhtsaVars.length" cols="10" md="4">
+        <div class="main-card">
+          <div v-for="(feature, index) in vehicle.nhtsaVars" :key="index">{{feature}}</div>
         </div>
-        <div class="img-flex">
-          <img id="sidecrashpic" :src="vehicle.sideCrashPicture" alt=" ">
+      </v-col>
+      <v-col  cols="10" md="4">
+        <div class="main-card sm-card">
+          <div>Complaints: {{vehicle.complaints}}</div>
+          <div>Recalls: {{vehicle.recalls}}</div>
+          <div>Investigations: {{vehicle.investigations}}</div>
         </div>
-        <div>
-          <div>Side Crash Rating: <Stars :stars="vehicle.sideCrashRating"/></div>
-          <div>Driver Side Rating: <Stars :stars="vehicle.sideDriverSideRating"/></div>
-          <div>Passenger Side Rating: <Stars :stars="vehicle.sidePassengerSideRating"/></div>
-        </div>
-        <div class="img-flex">
-          <img id="sidepolecrashpic" :src="vehicle.sidePolePicture" alt=" ">
-        </div>
-        <div>Side Pole Crash Rating: <Stars :stars="vehicle.sidePoleCrashRating"/></div>
-      </div>
-    </div>
-  </div>
+      </v-col>
+      <v-col v-if="vehicle.crashRatings" id="crash" cols="12">
+        <v-row justify="center" class="mt-md-3">
+          <v-col v-if="front" cols="10" md="4">
+            <div class="ratings-card">
+              <img :src="vehicle.frontCrashPic" alt=" " class="d-block mx-auto">
+              <div class="ratings">
+                <div>Front Crash: <Stars :stars="vehicle.frontCrashRating"/></div>
+                <div>Driver Side: <Stars :stars="vehicle.driverSideRating"/></div>
+                <div>Passenger Side: <Stars :stars="vehicle.passengerSideRating"/></div>
+              </div>
+            </div>
+          </v-col>
+          <v-col v-if="side" cols="10" md="4">
+            <div class="ratings-card">
+              <img :src="vehicle.sideCrashPicture" alt=" " class="d-block mx-auto">
+              <div class="ratings">
+                <div>Side Crash: <Stars :stars="vehicle.sideCrashRating"/></div>
+                <div>Driver Side: <Stars :stars="vehicle.sideDriverSideRating"/></div>
+                <div>Passenger Side: <Stars :stars="vehicle.sidePassengerSideRating"/></div>
+              </div>
+            </div>
+          </v-col>
+          <v-col v-if="pole" cols="10" md="4">
+            <div class="ratings-card">
+              <img :src="vehicle.sidePolePicture" alt=" " class="d-block mx-auto">
+              <div class="ratings">Side Pole Crash: <Stars :stars="vehicle.sidePoleCrashRating"/></div>
+            </div>
+          </v-col>
+        </v-row>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
@@ -54,6 +83,22 @@ export default {
   props: {
     vehicle: Object
   },
+  computed: {
+    main(){
+      return this.vehicle.overallRating || this.vehicle.rolloverRating
+    },
+    front(){
+      return this.vehicle.frontCrashPic || this.vehicle.frontCrashRating ||
+        this.vehicle.driverSideRating || this.vehicle.passengerSideRating;
+    },
+    side(){
+      return this.vehicle.sideCrashPic || this.vehicle.sideCrashRating ||
+        this.vehicle.sideDriverSideRating || this.vehicle.sidePassengerSideRating;
+    },
+    pole(){
+      return this.vehicle.sidePolePicture || this.vehicle.sidePoleCrashRating;
+    }
+  },
   filters: {
     percent: function(value) {
       const p = value*100;
@@ -64,62 +109,28 @@ export default {
 </script>
 
 <style>
-#vehicle {
-  margin: 20px 0;
+img {
+  max-width: 100%;
 }
-
-h2, h4 {
-  padding: .5em 0;
+.main-img {
+  max-height: 35vh;
+  width: 450px;
 }
-
-h2 {
-  font-size: 1.75em
+.main-card {
+  background-color: #f5f5f5;
+  border-color: #f5f5f5
 }
-
-h4 {
-  font-size: 1.3em;
+.ratings, .sm-card {
+  width: 13.5em;
+  margin: 0 auto;
 }
-
-#crash {
-  clear: both;
-  margin: 10px 0 0;
+.ratings-card {
+  background-color: #eeeeee;
+  border-color: #eeeeee;
 }
-
-#crash img, #vehpic{
-  border: none;
-  max-width: 300px;
-}
-
-.cols > div.img-flex {
-  flex: 0 0 300px;
-  text-align: right;
-}
-
-.cols {
-  display: flex;
-  flex-flow: row-reverse wrap;
-  row-gap: 10px;
-}
-
-.cols > div {
-  flex-grow: 1;
-}
-
-.clear:after {
-  content: '';
-  display: block;
-  clear: both;
-  margin-bottom: 10px;
-}
-
-@media (max-width: 690px) {
-  .cols {
-    flex-flow: column;
-  }
-
-  .cols > div.img-flex {
-    text-align: center;
-    flex-basis: auto;
-  }
+.ratings-card, .main-card {
+  padding: 16px 8px;
+  border-radius: 5px;
+  height: 100%;
 }
 </style>

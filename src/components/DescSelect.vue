@@ -1,18 +1,15 @@
 <template>
-  <div id="desc" class="select-div">
-    <select :value=value @input="$emit('input',$event.target.value)">
-      <option value="">Vehicle Description:</option>
-      <option 
-        v-for="description in descriptions"
-        :key="description.id"
-        :value="description.id"
-      >
-        {{description.name}}
-      </option>
-    </select>
-    <font-awesome-icon :icon="['fas','chevron-down']" class="chevron">
-    </font-awesome-icon>
-  </div>
+  <v-select
+    v-model="selected"
+    :value=value
+    label="Vehicle Description"
+    :items="descriptions"
+    class="desc mx-1"
+    menu-props="dark"
+    dense
+    dark
+    solo
+  />
 </template>
 
 <script>
@@ -29,7 +26,8 @@ export default {
   },
   data (){
     return {
-      descriptions: []
+      descriptions: [],
+      selected: ""
     }
   },
   watch: {
@@ -53,10 +51,14 @@ export default {
         return;
       }
       this.getData();
+    },
+    selected: function (){
+      this.$emit('input', this.selected.toString());
     }
   },
   methods: {
     getData: function (){
+      this.selected="";
       axios
         .jsonp(NHTSA.endpoint
           + '/modelyear/' + this.year
@@ -66,8 +68,8 @@ export default {
         .then(response => {
           this.descriptions = response.Results.map(result => {
             return {
-              id: result.VehicleId,
-              name: result.VehicleDescription
+              value: result.VehicleId,
+              text: result.VehicleDescription
             }
           })
         })
@@ -80,7 +82,7 @@ export default {
 </script>
 
 <style>
-#desc {
+.v-input.desc {
   flex: 0 0 320px;
 }
 </style>

@@ -1,14 +1,16 @@
 <template>
-  <div id="app">
-    <h1>NHTSA Safety Ratings Database</h1>
-    <div class="select-box">
+  <v-app :style="{background: $vuetify.theme.themes[theme].background}">
+    <h1
+      class="text-center display-1 font-weight-bold my-3 blue-grey--text text--darken-4"
+    >NHTSA Safety Ratings Database</h1>
+    <div class="d-flex justify-center flex-row flex-wrap">
       <YearSelect v-model="year"></YearSelect>
       <MakeSelect v-model="make" :year="year"></MakeSelect>
       <ModelSelect v-model="model" :year="year" :make="make"></ModelSelect>
       <DescSelect v-model="vehId" :year="year" :make="make" :model="model"></DescSelect>
     </div>
     <DisplayVehicle :vehicle="vehicle"></DisplayVehicle>
-  </div>
+  </v-app>
 </template>
 
 <script>
@@ -21,7 +23,7 @@ import DescSelect from './components/DescSelect'
 import DisplayVehicle from './components/DisplayVehicle'
 
 export default {
-  name: 'app',
+  name: 'App',
   components: {
     YearSelect,
     MakeSelect,
@@ -36,6 +38,11 @@ export default {
       model: "",
       vehId: "",
       vehicle: null
+    }
+  },
+  computed: {
+    theme(){
+      return (this.$vuetify.theme.dark) ? 'dark' : 'light'
     }
   },
   methods: {
@@ -107,16 +114,7 @@ export default {
 </script>
 
 <style>
-h1 {
-  font-size: 2em;
-  color: #303030;
-  margin: 10px 0;
-}
-
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
+.v-messages, .v-text-field__details {
+  min-height: 0;
 }
 </style>

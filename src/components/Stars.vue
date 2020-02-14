@@ -1,15 +1,19 @@
 <template>
   <span>
-    <font-awesome-icon 
-      v-for="count in stars"
-      :key="count"
-      :icon="['fas','star']"
-    ></font-awesome-icon>
-    <font-awesome-icon 
-      v-for="count in emptyStars"
-      :key="count+stars"
-      :icon="['far','star']"
-    ></font-awesome-icon>
+    <span v-if="stars">
+      <font-awesome-icon 
+        v-for="count in stars"
+        :key="count"
+        :icon="['fas','star']"
+      ></font-awesome-icon>
+    </span>
+    <span v-if="emptyStars">
+      <font-awesome-icon 
+        v-for="count in emptyStars"
+        :key="count+stars"
+        :icon="['far','star']"
+      ></font-awesome-icon>
+    </span>
   </span>
 </template>
 
