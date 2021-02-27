@@ -18,7 +18,7 @@
     "vuetify": "^2.4.5"
   },
   "devDependencies": {
-    "@babel/plugin-proposal-optional-chaining": "^7.13.0",
+    "@babel/plugin-proposal-optional-chaining": "^7.13.8",
     "@vue/cli-plugin-babel": "^4.5.11",
     "@vue/cli-plugin-eslint": "^4.5.11",
     "@vue/cli-service": "^4.5.11",
