@@ -27,7 +27,7 @@
     "eslint-plugin-vue": "^7.6.0",
     "sass": "^1.32.8",
     "sass-loader": "10.1.1",
-    "vue-cli-plugin-vuetify": "^2.2.0",
+    "vue-cli-plugin-vuetify": "^2.2.2",
     "vue-template-compiler": "^2.6.12",
     "vuetify-loader": "^1.7.2",
     "webpack-bundle-analyzer": "^4.4.0"
