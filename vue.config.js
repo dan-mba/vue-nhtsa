@@ -11,7 +11,7 @@ module.exports = {
   ],
   chainWebpack: config => {
     config.performance
-      .maxEntrypointSize(700000)
-      .maxAssetSize(400000)
+      .maxEntrypointSize(760000)
+      .maxAssetSize(410000)
   }
 }
