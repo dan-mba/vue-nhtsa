@@ -1,26 +1,26 @@
 <template>
-  <v-app :style="{background: $vuetify.theme.themes[theme].background}">
+  <main>
     <h1
-      class="text-center display-1 font-weight-bold my-3 blue-grey--text text--darken-4"
+      class="p-text-center p-text-bold p-my-3"
     >NHTSA Safety Ratings Database</h1>
-    <div class="d-flex justify-center flex-row flex-wrap">
+    <div class="p-d-flex p-jc-center p-flex-row p-flex-wrap">
       <YearSelect v-model="year"></YearSelect>
       <MakeSelect v-model="make" :year="year"></MakeSelect>
       <ModelSelect v-model="model" :year="year" :make="make"></ModelSelect>
       <DescSelect v-model="vehId" :year="year" :make="make" :model="model"></DescSelect>
     </div>
     <DisplayVehicle :vehicle="vehicle"></DisplayVehicle>
-  </v-app>
+  </main>
 </template>
 
 <script>
-import NHTSA from './constants/endpoints'
-import axios from 'axios-jsonp-pro'
-import YearSelect from './components/YearSelect'
-import MakeSelect from './components/MakeSelect'
-import ModelSelect from './components/ModelSelect'
-import DescSelect from './components/DescSelect'
-import DisplayVehicle from './components/DisplayVehicle'
+import NHTSA from './constants/endpoints';
+import axios from 'axios-jsonp-pro';
+import YearSelect from './components/YearSelect';
+import MakeSelect from './components/MakeSelect';
+import ModelSelect from './components/ModelSelect';
+import DescSelect from './components/DescSelect';
+import DisplayVehicle from './components/DisplayVehicle';
 
 export default {
   name: 'App',
@@ -38,11 +38,6 @@ export default {
       model: "",
       vehId: "",
       vehicle: null
-    }
-  },
-  computed: {
-    theme(){
-      return (this.$vuetify.theme.dark) ? 'dark' : 'light'
     }
   },
   methods: {

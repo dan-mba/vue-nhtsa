@@ -1,20 +1,18 @@
 <template>
-  <v-select
+  <Dropdown
     v-model="selected"
     :value=value
-    label="Model"
-    :items="models"
-    class="model mx-1"
-    menu-props="dark"
-    dense
-    dark
-    solo
+    :options="models"
+    optionLabel="text"
+    optionValue="value"
+    placeholder="Model"
+    class="model p-mx-1"
   />
 </template>
 
 <script>
-import NHTSA from '../constants/endpoints'
-import axios from 'axios-jsonp-pro'
+import NHTSA from '../constants/endpoints';
+import axios from 'axios-jsonp-pro';
 
 export default {
   name: 'ModelSelect',
@@ -74,7 +72,7 @@ export default {
 </script>
 
 <style>
-.v-input.model {
+div.model {
   flex: 0 0 300px;
 }
 </style>

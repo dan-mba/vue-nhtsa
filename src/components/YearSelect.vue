@@ -1,20 +1,18 @@
 <template>
-  <v-select
+  <Dropdown
     v-model="selected"
     :value=value
-    label="Year"
-    :items="years"
-    class="year mx-1"
-    menu-props="dark"
-    dense
-    dark
-    solo
+    :options="years"
+    optionLabel="value"
+    optionValue="value"
+    placeholder="Year"
+    class="year p-mx-1"
   />
 </template>
 
 <script>
-import NHTSA from '../constants/endpoints'
-import axios from 'axios-jsonp-pro'
+import NHTSA from '../constants/endpoints';
+import axios from 'axios-jsonp-pro';
 
 export default {
   name: 'YearSelect',
@@ -31,7 +29,9 @@ export default {
     axios
       .jsonp(NHTSA.endpoint+NHTSA.dataType)
       .then(response => {
-        this.years = response.Results.map(result => result.ModelYear);
+        this.years = response.Results.map(result => {
+          return {value: `${result.ModelYear}`}
+        });
       })
       .catch(error => {
         console.log(error);
@@ -46,7 +46,7 @@ export default {
 </script>
 
 <style>
-.v-input.year {
+div.year {
   flex: 0 0 90px;
 }
 </style>

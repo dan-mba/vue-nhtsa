@@ -1,75 +1,87 @@
 <template>
-  <v-container
+  <div
     v-if="vehicle"
     id="vehicle"
-    fluid
-    grid-list-sm
   >
-    <v-row justify="center" dense>
-      <v-col cols="12" class="mb-3">
-        <h2 class="blue-grey--text text--darken-4 display-1 text-center font-weight-bold mb-2">
+    <div class="p-grid p-jc-center p-mt-3">
+      <div class="p-col-12 p-mb-3">
+        <h2 class="p-text-center p-font-weight-bold p-mb-3">
           {{ vehicle.description }}
         </h2>
         <img
-          v-if="vehicle.picture"
+          :v-if="vehicle.picture"
           id="vehpic"
           :src="vehicle.picture"
           alt=" "
-          class="mx-auto d-block main-img"
+          class="p-mx-auto p-d-block main-img"
         />
-      </v-col>
+      </div>
 
-      <v-col v-if="main" cols="10" md="4">
-        <div class="main-card sm-card">
-          <div>Overall: <Stars :stars="vehicle.overallRating"/></div>
-          <div>Rollover: <Stars :stars="vehicle.rolloverRating"/></div>
-          <div>Rollover Possibility: {{vehicle.rolloverPossibility | percent}}</div>
+      <div v-if="main" class="p-col-10 p-md-4">
+        <Card class="sm-card">
+          <template #content>
+            <div>Overall: <Stars :stars="vehicle.overallRating"/></div>
+            <div>Rollover: <Stars :stars="vehicle.rolloverRating"/></div>
+            <div>Rollover Possibility: {{rolloverPercent}}</div>
+          </template>
+        </Card>
+      </div>
+      <div v-if="vehicle.nhtsaVars.length" class="p-col-10 p-md-4">
+        <Card>
+          <template #content>
+            <div v-for="(feature, index) in vehicle.nhtsaVars" :key="index">{{feature}}</div>
+          </template>
+        </Card>
+      </div>
+      <div class="p-col-10 p-md-4">
+        <Card class="sm-card">
+          <template #content>
+            <div>Complaints: {{vehicle.complaints}}</div>
+            <div>Recalls: {{vehicle.recalls}}</div>
+            <div>Investigations: {{vehicle.investigations}}</div>
+          </template>
+        </Card>
+      </div>
+      <div v-if="vehicle.crashRatings" id="crash" class="p-col-12">
+        <div class="p-grid p-jc-center p-mt-md-2">
+          <div v-if="front" class="p-col-10 p-md-4">
+            <Card>
+              <template #content>
+                <img :src="vehicle.frontCrashPic" alt=" " class="p-d-block p-mx-auto p-mb-2">
+                <div class="ratings">
+                  <div>Front Crash: <Stars :stars="vehicle.frontCrashRating"/></div>
+                  <div>Driver Side: <Stars :stars="vehicle.driverSideRating"/></div>
+                  <div>Passenger Side: <Stars :stars="vehicle.passengerSideRating"/></div>
+                </div>
+              </template>
+            </Card>
+          </div>
+          <div v-if="side" class="p-col-10 p-md-4">
+            <Card>
+              <template #content>
+                <img :src="vehicle.sideCrashPicture" alt=" " class="p-d-block p-mx-auto p-mb-2">
+                <div class="ratings">
+                  <div>Side Crash: <Stars :stars="vehicle.sideCrashRating"/></div>
+                  <div>Driver Side: <Stars :stars="vehicle.sideDriverSideRating"/></div>
+                  <div>Passenger Side: <Stars :stars="vehicle.sidePassengerSideRating"/></div>
+                </div>
+              </template>
+            </Card>
+          </div>
+          <div v-if="pole" class="p-col-10 p-md-4">
+            <Card>
+              <template #content>
+                <img :src="vehicle.sidePolePicture" alt=" " class="p-d-block p-mx-auto p-mb-2">
+                <div class="ratings">
+                  Side Pole Crash: <Stars :stars="vehicle.sidePoleCrashRating"/>
+                </div>
+              </template>
+            </Card>
+          </div>
         </div>
-      </v-col>
-      <v-col v-if="vehicle.nhtsaVars.length" cols="10" md="4">
-        <div class="main-card">
-          <div v-for="(feature, index) in vehicle.nhtsaVars" :key="index">{{feature}}</div>
-        </div>
-      </v-col>
-      <v-col  cols="10" md="4">
-        <div class="main-card sm-card">
-          <div>Complaints: {{vehicle.complaints}}</div>
-          <div>Recalls: {{vehicle.recalls}}</div>
-          <div>Investigations: {{vehicle.investigations}}</div>
-        </div>
-      </v-col>
-      <v-col v-if="vehicle.crashRatings" id="crash" cols="12">
-        <v-row justify="center" class="mt-md-3">
-          <v-col v-if="front" cols="10" md="4">
-            <div class="ratings-card">
-              <img :src="vehicle.frontCrashPic" alt=" " class="d-block mx-auto">
-              <div class="ratings">
-                <div>Front Crash: <Stars :stars="vehicle.frontCrashRating"/></div>
-                <div>Driver Side: <Stars :stars="vehicle.driverSideRating"/></div>
-                <div>Passenger Side: <Stars :stars="vehicle.passengerSideRating"/></div>
-              </div>
-            </div>
-          </v-col>
-          <v-col v-if="side" cols="10" md="4">
-            <div class="ratings-card">
-              <img :src="vehicle.sideCrashPicture" alt=" " class="d-block mx-auto">
-              <div class="ratings">
-                <div>Side Crash: <Stars :stars="vehicle.sideCrashRating"/></div>
-                <div>Driver Side: <Stars :stars="vehicle.sideDriverSideRating"/></div>
-                <div>Passenger Side: <Stars :stars="vehicle.sidePassengerSideRating"/></div>
-              </div>
-            </div>
-          </v-col>
-          <v-col v-if="pole" cols="10" md="4">
-            <div class="ratings-card">
-              <img :src="vehicle.sidePolePicture" alt=" " class="d-block mx-auto">
-              <div class="ratings">Side Pole Crash: <Stars :stars="vehicle.sidePoleCrashRating"/></div>
-            </div>
-          </v-col>
-        </v-row>
-      </v-col>
-    </v-row>
-  </v-container>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -97,12 +109,10 @@ export default {
     },
     pole(){
       return this.vehicle.sidePolePicture || this.vehicle.sidePoleCrashRating;
-    }
-  },
-  filters: {
-    percent: function(value) {
-      const p = value*100;
-      return p.toFixed(2) + '%';
+    },
+    rolloverPercent(){
+      const p = this.vehicle.rolloverPossibility*100;
+      return `${p.toFixed(2)}%`;
     }
   }
 }
@@ -116,21 +126,14 @@ img {
   max-height: 35vh;
   width: 450px;
 }
-.main-card {
-  background-color: #f5f5f5;
-  border-color: #f5f5f5
+.p-card {
+  height: 100%;
+  width: 100%;
 }
-.ratings, .sm-card {
-  width: 13.5em;
+
+.ratings, .sm-card .p-card-content {
+  width: 14em;
   margin: 0 auto;
 }
-.ratings-card {
-  background-color: #eeeeee;
-  border-color: #eeeeee;
-}
-.ratings-card, .main-card {
-  padding: 16px 8px;
-  border-radius: 5px;
-  height: 100%;
-}
+
 </style>

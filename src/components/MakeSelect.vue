@@ -1,20 +1,18 @@
 <template>
-  <v-select
+  <Dropdown
     v-model="selected"
     :value=value
-    label="Make"
-    :items="makes"
-    class="make mx-1"
-    menu-props="dark"
-    dense
-    dark
-    solo
+    :options="makes"
+    optionLabel="text"
+    optionValue="value"
+    placeholder="Make"
+    class="make p-mx-1"
   />
 </template>
 
 <script>
-import NHTSA from '../constants/endpoints'
-import axios from 'axios-jsonp-pro'
+import NHTSA from '../constants/endpoints';
+import axios from 'axios-jsonp-pro';
 
 export default {
   name: 'MakeSelect',
@@ -57,7 +55,7 @@ export default {
 </script>
 
 <style>
-.v-input.make {
+div.make {
   flex: 0 0 210px;
 }
 </style>

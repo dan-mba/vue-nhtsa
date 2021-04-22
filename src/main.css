@@ -9,36 +9,7 @@
 body {
   max-width: 900px;
   margin: 0 auto;
-  background-color: #cfd8dc;
+  background-color: var(--surface-b);
+  color: var(--text-color);
+  font-family: var(--font-family);
 }
-
-img {
-  max-width: 300px;
-}
-
-h1, h2, h4 {
-  text-align: center;
-}
-
-@media (max-width:690px) {
-  body {
-    width: calc(100% - 10px);
-    margin: 0 5px;
-  }
-  
-  h2 {
-    font-size: 1.2em;
-   }
-}
-
-div.select-box {
-  display:flex;
-  flex-flow: row wrap;
-  justify-content: center;
-}
-
-.v-messages, .v-text-field__details {
-  min-height: 0;
-}
-
-

@@ -1,19 +1,20 @@
-import Vue from 'vue'
-import App from './App'
+import {createApp} from 'vue';
+import App from './App';
+import PrimeVue from 'primevue/config';
+import Dropdown from 'primevue/dropdown';
+import Card from 'primevue/card';
+import Rating from 'primevue/rating';
+import 'primevue/resources/themes/vela-blue/theme.css';
+import 'primevue/resources/primevue.min.css';
+import 'primeicons/primeicons.css';
+import 'primeflex/primeflex.css';
+import './main.css';
 
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { faStar as faStarSolid, faCaretDown } from '@fortawesome/free-solid-svg-icons'
-import { faStar as faStarRegular } from '@fortawesome/free-regular-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import vuetify from './plugins/vuetify';
+const app = createApp(App);
 
-library.add(faStarRegular, faStarSolid, faCaretDown)
+app.use(PrimeVue);
+app.component('Dropdown', Dropdown);
+app.component('Card', Card);
+app.component('Rating', Rating);
 
-Vue.component('font-awesome-icon', FontAwesomeIcon)
-
-Vue.config.productionTip = false
-
-new Vue({
-  vuetify,
-  render: h => h(App)
-}).$mount('#app')
+app.mount('#app');
