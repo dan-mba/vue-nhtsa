@@ -109,7 +109,8 @@ export default {
 </script>
 
 <style>
-.v-messages, .v-text-field__details {
-  min-height: 0;
+main {
+  width: 98%;
+  margin: 0 auto;
 }
 </style>

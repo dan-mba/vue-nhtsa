@@ -6,7 +6,7 @@
     optionLabel="value"
     optionValue="value"
     placeholder="Year"
-    class="year p-mx-1"
+    class="year p-m-1"
   />
 </template>
 

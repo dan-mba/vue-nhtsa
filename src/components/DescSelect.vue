@@ -6,7 +6,7 @@
     optionLabel="text"
     optionValue="value"
     placeholder="Vehicle Description"
-    class="desc p-mx-1"
+    class="desc p-m-1"
   />
 </template>
 

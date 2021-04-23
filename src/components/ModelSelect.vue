@@ -6,7 +6,7 @@
     optionLabel="text"
     optionValue="value"
     placeholder="Model"
-    class="model p-mx-1"
+    class="model p-m-1"
   />
 </template>
 
