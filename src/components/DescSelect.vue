@@ -1,20 +1,18 @@
 <template>
-  <v-select
+  <Dropdown
     v-model="selected"
     :value=value
-    label="Vehicle Description"
-    :items="descriptions"
-    class="desc mx-1"
-    menu-props="dark"
-    dense
-    dark
-    solo
+    :options="descriptions"
+    optionLabel="text"
+    optionValue="value"
+    placeholder="Vehicle Description"
+    class="desc p-m-1"
   />
 </template>
 
 <script>
-import NHTSA from '../constants/endpoints'
-import axios from 'axios-jsonp-pro'
+import NHTSA from '../constants/endpoints';
+import axios from 'axios-jsonp-pro';
 
 export default {
   name: 'DescSelect',
@@ -82,7 +80,7 @@ export default {
 </script>
 
 <style>
-.v-input.desc {
+div.desc {
   flex: 0 0 320px;
 }
 </style>
