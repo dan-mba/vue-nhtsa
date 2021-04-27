@@ -1,12 +1,16 @@
 <template>
-  <Rating :modelValue="stars" :readonly="true" :cancel="false"/>
+  <Rating
+    :model-value="stars"
+    :readonly="true"
+    :cancel="false"
+  />
 </template>
 
 <script>
 export default {
   name: 'Stars',
   props: {
-    stars: Number,
+    stars: {type: Number, default: 0},
   }
 }
 </script>

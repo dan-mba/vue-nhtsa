@@ -9,71 +9,107 @@
           {{ vehicle.description }}
         </h2>
         <img
-          :v-if="vehicle.picture"
           id="vehpic"
+          :v-if="vehicle.picture"
           :src="vehicle.picture"
           alt=" "
           class="p-mx-auto p-d-block main-img"
-        />
+        >
       </div>
 
-      <div v-if="main" class="p-col-10 p-md-4">
+      <div
+        v-if="main"
+        class="p-col-10 p-md-4"
+      >
         <Card class="sm-card">
           <template #content>
-            <div>Overall: <Stars :stars="vehicle.overallRating"/></div>
-            <div>Rollover: <Stars :stars="vehicle.rolloverRating"/></div>
-            <div>Rollover Possibility: {{rolloverPercent}}</div>
+            <div>Overall: <Stars :stars="vehicle.overallRating" /></div>
+            <div>Rollover: <Stars :stars="vehicle.rolloverRating" /></div>
+            <div>Rollover Possibility: {{ rolloverPercent }}</div>
           </template>
         </Card>
       </div>
-      <div v-if="vehicle.nhtsaVars.length" class="p-col-10 p-md-4">
+      <div
+        v-if="vehicle.nhtsaVars.length"
+        class="p-col-10 p-md-4"
+      >
         <Card>
           <template #content>
-            <div v-for="(feature, index) in vehicle.nhtsaVars" :key="index">{{feature}}</div>
+            <div
+              v-for="(feature, index) in vehicle.nhtsaVars"
+              :key="index"
+            >
+              {{ feature }}
+            </div>
           </template>
         </Card>
       </div>
       <div class="p-col-10 p-md-4">
         <Card class="sm-card">
           <template #content>
-            <div>Complaints: {{vehicle.complaints}}</div>
-            <div>Recalls: {{vehicle.recalls}}</div>
-            <div>Investigations: {{vehicle.investigations}}</div>
+            <div>Complaints: {{ vehicle.complaints }}</div>
+            <div>Recalls: {{ vehicle.recalls }}</div>
+            <div>Investigations: {{ vehicle.investigations }}</div>
           </template>
         </Card>
       </div>
-      <div v-if="vehicle.crashRatings" id="crash" class="p-col-12">
+      <div
+        v-if="vehicle.crashRatings"
+        id="crash"
+        class="p-col-12"
+      >
         <div class="p-grid p-jc-center p-mt-md-2">
-          <div v-if="front" class="p-col-10 p-md-4">
+          <div
+            v-if="front"
+            class="p-col-10 p-md-4"
+          >
             <Card>
               <template #content>
-                <img :src="vehicle.frontCrashPic" alt=" " class="p-d-block p-mx-auto p-mb-2">
+                <img
+                  :src="vehicle.frontCrashPic"
+                  alt=" "
+                  class="p-d-block p-mx-auto p-mb-2"
+                >
                 <div class="ratings">
-                  <div>Front Crash: <Stars :stars="vehicle.frontCrashRating"/></div>
-                  <div>Driver Side: <Stars :stars="vehicle.driverSideRating"/></div>
-                  <div>Passenger Side: <Stars :stars="vehicle.passengerSideRating"/></div>
+                  <div>Front Crash: <Stars :stars="vehicle.frontCrashRating" /></div>
+                  <div>Driver Side: <Stars :stars="vehicle.driverSideRating" /></div>
+                  <div>Passenger Side: <Stars :stars="vehicle.passengerSideRating" /></div>
                 </div>
               </template>
             </Card>
           </div>
-          <div v-if="side" class="p-col-10 p-md-4">
+          <div
+            v-if="side"
+            class="p-col-10 p-md-4"
+          >
             <Card>
               <template #content>
-                <img :src="vehicle.sideCrashPicture" alt=" " class="p-d-block p-mx-auto p-mb-2">
+                <img
+                  :src="vehicle.sideCrashPicture"
+                  alt=" "
+                  class="p-d-block p-mx-auto p-mb-2"
+                >
                 <div class="ratings">
-                  <div>Side Crash: <Stars :stars="vehicle.sideCrashRating"/></div>
-                  <div>Driver Side: <Stars :stars="vehicle.sideDriverSideRating"/></div>
-                  <div>Passenger Side: <Stars :stars="vehicle.sidePassengerSideRating"/></div>
+                  <div>Side Crash: <Stars :stars="vehicle.sideCrashRating" /></div>
+                  <div>Driver Side: <Stars :stars="vehicle.sideDriverSideRating" /></div>
+                  <div>Passenger Side: <Stars :stars="vehicle.sidePassengerSideRating" /></div>
                 </div>
               </template>
             </Card>
           </div>
-          <div v-if="pole" class="p-col-10 p-md-4">
+          <div
+            v-if="pole"
+            class="p-col-10 p-md-4"
+          >
             <Card>
               <template #content>
-                <img :src="vehicle.sidePolePicture" alt=" " class="p-d-block p-mx-auto p-mb-2">
+                <img
+                  :src="vehicle.sidePolePicture"
+                  alt=" "
+                  class="p-d-block p-mx-auto p-mb-2"
+                >
                 <div class="ratings">
-                  Side Pole Crash: <Stars :stars="vehicle.sidePoleCrashRating"/>
+                  Side Pole Crash: <Stars :stars="vehicle.sidePoleCrashRating" />
                 </div>
               </template>
             </Card>
@@ -93,7 +129,7 @@ export default {
     Stars,
   },
   props: {
-    vehicle: Object
+    vehicle: {type: Object, default: () => {return {}}}
   },
   computed: {
     main(){

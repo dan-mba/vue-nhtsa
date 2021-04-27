@@ -1,10 +1,10 @@
 <template>
   <Dropdown
     v-model="selected"
-    :value=value
+    :value="value"
     :options="years"
-    optionLabel="value"
-    optionValue="value"
+    option-label="value"
+    option-value="value"
     placeholder="Year"
     class="year p-m-1"
   />
@@ -17,12 +17,18 @@ import axios from 'axios-jsonp-pro';
 export default {
   name: 'YearSelect',
   props: {
-    value: String
+    value: {type: String, default: ''}
   },
+  emits: ['input'],
   data (){
     return {
       years: [],
       selected: ""
+    }
+  },
+  watch: {
+    selected: function(){
+      this.$emit('input', this.selected.toString());
     }
   },
   mounted (){
@@ -36,11 +42,6 @@ export default {
       .catch(error => {
         console.log(error);
       })
-  },
-  watch: {
-    selected: function(){
-      this.$emit('input', this.selected.toString());
-    }
   }
 }
 </script>

@@ -2,14 +2,28 @@
   <main>
     <h1
       class="p-text-center p-text-bold p-my-3"
-    >NHTSA Safety Ratings Database</h1>
+    >
+      NHTSA Safety Ratings Database
+    </h1>
     <div class="p-d-flex p-jc-center p-flex-row p-flex-wrap">
-      <YearSelect v-model="year"></YearSelect>
-      <MakeSelect v-model="make" :year="year"></MakeSelect>
-      <ModelSelect v-model="model" :year="year" :make="make"></ModelSelect>
-      <DescSelect v-model="vehId" :year="year" :make="make" :model="model"></DescSelect>
+      <YearSelect v-model="year" />
+      <MakeSelect
+        v-model="make"
+        :year="year"
+      />
+      <ModelSelect
+        v-model="model"
+        :year="year"
+        :make="make"
+      />
+      <DescSelect
+        v-model="vehId"
+        :year="year"
+        :make="make"
+        :model="model"
+      />
     </div>
-    <DisplayVehicle :vehicle="vehicle"></DisplayVehicle>
+    <DisplayVehicle :vehicle="vehicle" />
   </main>
 </template>
 
@@ -38,6 +52,23 @@ export default {
       model: "",
       vehId: "",
       vehicle: null
+    }
+  },
+  watch: {
+    year: function (){
+      this.make="";
+      this.model="";
+      this.vehId="";
+    },
+    make: function (){
+      this.model="";
+      this.vehId="";
+    },
+    model: function (){
+      this.vehId="";
+    },
+    vehId: function (){
+      this.getData();
     }
   },
   methods: {
@@ -86,23 +117,6 @@ export default {
         .catch(error => {
           console.log(error);
         })
-    }
-  },
-  watch: {
-    year: function (){
-      this.make="";
-      this.model="";
-      this.vehId="";
-    },
-    make: function (){
-      this.model="";
-      this.vehId="";
-    },
-    model: function (){
-      this.vehId="";
-    },
-    vehId: function (){
-      this.getData();
     }
   }
 }

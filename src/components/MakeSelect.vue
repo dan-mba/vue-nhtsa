@@ -1,10 +1,10 @@
 <template>
   <Dropdown
     v-model="selected"
-    :value=value
+    :value="value"
     :options="makes"
-    optionLabel="text"
-    optionValue="value"
+    option-label="text"
+    option-value="value"
     placeholder="Make"
     class="make p-m-1"
   />
@@ -17,9 +17,10 @@ import axios from 'axios-jsonp-pro';
 export default {
   name: 'MakeSelect',
   props: {
-    value: String,
-    year: String,
+    value: {type: String, default: ''},
+    year: {type: String, default: ''},
   },
+  emits: ['input'],
   data (){
     return {
       makes: [],

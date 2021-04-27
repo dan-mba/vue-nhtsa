@@ -1,10 +1,10 @@
 <template>
   <Dropdown
     v-model="selected"
-    :value=value
+    :value="value"
     :options="descriptions"
-    optionLabel="text"
-    optionValue="value"
+    option-label="text"
+    option-value="value"
     placeholder="Vehicle Description"
     class="desc p-m-1"
   />
@@ -17,11 +17,12 @@ import axios from 'axios-jsonp-pro';
 export default {
   name: 'DescSelect',
   props: {
-    value: String,
-    year: String,
-    make: String,
-    model: String,
+    value: {type: String, default: ''},
+    year: {type: String, default: ''},
+    make: {type: String, default: ''},
+    model: {type: String, default: ''},
   },
+  emits: ['input'],
   data (){
     return {
       descriptions: [],
