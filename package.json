@@ -16,11 +16,11 @@
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.13.14",
-    "@vue/cli-plugin-babel": "^4.5.12",
-    "@vue/cli-plugin-eslint": "^4.5.12",
-    "@vue/cli-service": "^4.5.12",
+    "@vue/cli-plugin-babel": "^4.5.13",
+    "@vue/cli-plugin-eslint": "^4.5.13",
+    "@vue/cli-service": "^4.5.13",
     "@vue/compiler-sfc": "^3.0.11",
-    "eslint": "^7.25.0",
+    "eslint": "^7.26.0",
     "eslint-plugin-vue": "^7.9.0",
     "vue-template-compiler": "^2.6.12",
     "webpack-bundle-analyzer": "^4.4.1"
