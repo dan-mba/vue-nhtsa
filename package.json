@@ -23,7 +23,7 @@
     "eslint": "^7.27.0",
     "eslint-plugin-vue": "^7.9.0",
     "vue-template-compiler": "^2.6.12",
-    "webpack-bundle-analyzer": "^4.4.1"
+    "webpack-bundle-analyzer": "^4.4.2"
   },
   "eslintConfig": {
     "root": true,
