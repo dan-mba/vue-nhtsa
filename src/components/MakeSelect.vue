@@ -6,7 +6,7 @@
     option-label="text"
     option-value="value"
     placeholder="Make"
-    class="make p-m-1"
+    class="make m-1"
   />
 </template>
 

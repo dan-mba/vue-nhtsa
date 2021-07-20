@@ -3,9 +3,9 @@
     v-if="vehicle"
     id="vehicle"
   >
-    <div class="p-grid p-jc-center p-mt-3">
-      <div class="p-col-12 p-mb-3">
-        <h2 class="p-text-center p-font-weight-bold p-mb-3">
+    <div class="grid justify-content-center mt-3">
+      <div class="col-12 mb-3">
+        <h2 class="text-center font-weight-bold mb-3">
           {{ vehicle.description }}
         </h2>
         <img
@@ -13,13 +13,13 @@
           :v-if="vehicle.picture"
           :src="vehicle.picture"
           alt=" "
-          class="p-mx-auto p-d-block main-img"
+          class="mx-auto block main-img"
         >
       </div>
 
       <div
         v-if="main"
-        class="p-col-10 p-md-4"
+        class="col-10 md:col-4"
       >
         <Card class="sm-card">
           <template #content>
@@ -31,7 +31,7 @@
       </div>
       <div
         v-if="vehicle.nhtsaVars.length"
-        class="p-col-10 p-md-4"
+        class="col-10 md:col-4"
       >
         <Card>
           <template #content>
@@ -44,7 +44,7 @@
           </template>
         </Card>
       </div>
-      <div class="p-col-10 p-md-4">
+      <div class="col-10 md:col-4">
         <Card class="sm-card">
           <template #content>
             <div>Complaints: {{ vehicle.complaints }}</div>
@@ -56,19 +56,19 @@
       <div
         v-if="vehicle.crashRatings"
         id="crash"
-        class="p-col-12"
+        class="col-12"
       >
-        <div class="p-grid p-jc-center p-mt-md-2">
+        <div class="grid justify-content-center mt-md-2">
           <div
             v-if="front"
-            class="p-col-10 p-md-4"
+            class="col-10 md:col-4"
           >
             <Card>
               <template #content>
                 <img
                   :src="vehicle.frontCrashPic"
                   alt=" "
-                  class="p-d-block p-mx-auto p-mb-2"
+                  class="block mx-auto mb-2"
                 >
                 <div class="ratings">
                   <div>Front Crash: <Stars :stars="vehicle.frontCrashRating" /></div>
@@ -80,14 +80,14 @@
           </div>
           <div
             v-if="side"
-            class="p-col-10 p-md-4"
+            class="col-10 md:col-4"
           >
             <Card>
               <template #content>
                 <img
                   :src="vehicle.sideCrashPicture"
                   alt=" "
-                  class="p-d-block p-mx-auto p-mb-2"
+                  class="block mx-auto mb-2"
                 >
                 <div class="ratings">
                   <div>Side Crash: <Stars :stars="vehicle.sideCrashRating" /></div>
@@ -99,14 +99,14 @@
           </div>
           <div
             v-if="pole"
-            class="p-col-10 p-md-4"
+            class="col-10 md:col-4"
           >
             <Card>
               <template #content>
                 <img
                   :src="vehicle.sidePolePicture"
                   alt=" "
-                  class="p-d-block p-mx-auto p-mb-2"
+                  class="block mx-auto mb-2"
                 >
                 <div class="ratings">
                   Side Pole Crash: <Stars :stars="vehicle.sidePoleCrashRating" />

@@ -1,11 +1,11 @@
 <template>
   <main>
     <h1
-      class="p-text-center p-text-bold p-my-3"
+      class="text-center text-bold my-3"
     >
       NHTSA Safety Ratings Database
     </h1>
-    <div class="p-d-flex p-jc-center p-flex-row p-flex-wrap">
+    <div class="flex justify-content-center flex-row flex-wrap">
       <YearSelect v-model="year" />
       <MakeSelect
         v-model="make"

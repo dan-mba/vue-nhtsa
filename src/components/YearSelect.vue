@@ -6,7 +6,7 @@
     option-label="value"
     option-value="value"
     placeholder="Year"
-    class="year p-m-1"
+    class="year m-1"
   />
 </template>
 

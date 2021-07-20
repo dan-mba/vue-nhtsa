@@ -6,7 +6,7 @@
     option-label="text"
     option-value="value"
     placeholder="Model"
-    class="model p-m-1"
+    class="model m-1"
   />
 </template>
 
