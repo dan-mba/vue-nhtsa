@@ -12,7 +12,7 @@
 
 <script>
 import NHTSA from '../constants/endpoints';
-import axios from 'axios-jsonp-pro';
+import axios from 'axios';
 
 export default {
   name: 'MakeSelect',
@@ -35,9 +35,13 @@ export default {
       }
       this.selected="";
       axios
-        .jsonp(NHTSA.endpoint+'/modelyear/'+this.year+NHTSA.dataType)
+        .get(NHTSA.proxy, {
+          params: {
+            reqUrl: `${NHTSA.endpoint}/modelyear/${this.year}`
+          }
+        })
         .then(response => {
-          this.makes = response.Results.map(result => {
+          this.makes = response.data.Results.map(result => {
             return {
               value: result.Make.replace(/&/g,'_'),
               text: result.Make

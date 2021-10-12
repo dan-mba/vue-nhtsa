@@ -29,7 +29,7 @@
 
 <script>
 import NHTSA from './constants/endpoints';
-import axios from 'axios-jsonp-pro';
+import axios from 'axios';
 import YearSelect from './components/YearSelect';
 import MakeSelect from './components/MakeSelect';
 import ModelSelect from './components/ModelSelect';
@@ -78,9 +78,13 @@ export default {
         return;
       }
       axios
-        .jsonp(NHTSA.endpoint+'/vehicleid/'+this.vehId+NHTSA.dataType)
+        .get(NHTSA.proxy, {
+          params: {
+            reqUrl: `${NHTSA.endpoint}/VehicleId/${this.vehId}`
+          }
+        })
         .then(response => {
-          const data = response.Results[0];
+          const data = response.data.Results[0];
           this.vehicle = {
             description: data.VehicleDescription,
             picture: data.hasOwnProperty('VehiclePicture') ?

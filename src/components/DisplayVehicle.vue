@@ -156,11 +156,10 @@ export default {
 
 <style>
 img {
-  max-width: 100%;
+  max-width: min(100%, 450px);
 }
 .main-img {
   max-height: 35vh;
-  width: 450px;
 }
 .p-card {
   height: 100%;

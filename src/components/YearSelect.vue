@@ -12,7 +12,7 @@
 
 <script>
 import NHTSA from '../constants/endpoints';
-import axios from 'axios-jsonp-pro';
+import axios from 'axios';
 
 export default {
   name: 'YearSelect',
@@ -33,9 +33,14 @@ export default {
   },
   mounted (){
     axios
-      .jsonp(NHTSA.endpoint+NHTSA.dataType)
+      .get(NHTSA.proxy,{
+        params: {
+          reqUrl: NHTSA.endpoint
+        }
+      })
       .then(response => {
-        this.years = response.Results.map(result => {
+        console
+        this.years = response.data.Results.map(result => {
           return {value: `${result.ModelYear}`}
         });
       })

@@ -12,7 +12,7 @@
 
 <script>
 import NHTSA from '../constants/endpoints';
-import axios from 'axios-jsonp-pro';
+import axios from 'axios';
 
 export default {
   name: 'DescSelect',
@@ -59,13 +59,13 @@ export default {
     getData: function (){
       this.selected="";
       axios
-        .jsonp(NHTSA.endpoint
-          + '/modelyear/' + this.year
-          + '/make/' + this.make
-          + '/model/' + this.model
-          + NHTSA.dataType)
+        .get(NHTSA.proxy, {
+          params: {
+            reqUrl: `${NHTSA.endpoint}/modelyear/${this.year}/make/${this.make}/model/${this.model}`
+          }
+        })
         .then(response => {
-          this.descriptions = response.Results.map(result => {
+          this.descriptions = response.data.Results.map(result => {
             return {
               value: result.VehicleId,
               text: result.VehicleDescription

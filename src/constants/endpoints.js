@@ -1,5 +1,5 @@
 const NHTSA = {
-  endpoint: 'https://one.nhtsa.gov/webapi/api/SafetyRatings',
-  dataType: '?format=json',
+  endpoint: 'https://api.nhtsa.gov/SafetyRatings',
+  proxy: 'https://proxy.hackeryou.com'
 };
 export default NHTSA;
