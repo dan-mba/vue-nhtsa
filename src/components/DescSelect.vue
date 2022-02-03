@@ -59,11 +59,7 @@ export default {
     getData: function (){
       this.selected="";
       axios
-        .get(NHTSA.proxy, {
-          params: {
-            reqUrl: `${NHTSA.endpoint}/modelyear/${this.year}/make/${this.make}/model/${this.model}`
-          }
-        })
+        .get(`${NHTSA.proxy}?quest=${NHTSA.endpoint}/modelyear/${this.year}/make/${this.make}/model/${this.model}`)
         .then(response => {
           this.descriptions = response.data.Results.map(result => {
             return {

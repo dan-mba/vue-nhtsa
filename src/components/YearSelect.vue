@@ -33,11 +33,7 @@ export default {
   },
   mounted (){
     axios
-      .get(NHTSA.proxy,{
-        params: {
-          reqUrl: NHTSA.endpoint
-        }
-      })
+      .get(`${NHTSA.proxy}?quest=${NHTSA.endpoint}`)
       .then(response => {
         console
         this.years = response.data.Results.map(result => {

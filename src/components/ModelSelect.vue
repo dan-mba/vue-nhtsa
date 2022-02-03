@@ -52,11 +52,7 @@ export default {
   methods: {
     getData: function (){
       axios
-        .get(NHTSA.proxy, {
-          params: {
-            reqUrl: `${NHTSA.endpoint}/modelyear/${this.year}/make/${this.make}`
-          }
-        })
+        .get(`${NHTSA.proxy}?quest=${NHTSA.endpoint}/modelyear/${this.year}/make/${this.make}`)
         .then(response => {
           this.models = response.data.Results.map(result => {
             return {

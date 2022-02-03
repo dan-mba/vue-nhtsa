@@ -78,11 +78,7 @@ export default {
         return;
       }
       axios
-        .get(NHTSA.proxy, {
-          params: {
-            reqUrl: `${NHTSA.endpoint}/VehicleId/${this.vehId}`
-          }
-        })
+        .get(`${NHTSA.proxy}?quest=${NHTSA.endpoint}/VehicleId/${this.vehId}`)
         .then(response => {
           const data = response.data.Results[0];
           this.vehicle = {
