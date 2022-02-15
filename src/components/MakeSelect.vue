@@ -10,49 +10,45 @@
   />
 </template>
 
-<script>
+<script setup>
+import {ref, watch, defineProps, defineEmits} from 'vue';
 import NHTSA from '../constants/endpoints';
 import axios from 'axios';
 
-export default {
-  name: 'MakeSelect',
-  props: {
-    value: {type: String, default: ''},
-    year: {type: String, default: ''},
-  },
-  emits: ['input'],
-  data (){
-    return {
-      makes: [],
-      selected: ""
-    }
-  },
-  watch: {
-    year: function (){
-      if(this.year === "") {
-        this.makes=[];
-        return;
-      }
-      this.selected="";
-      axios
-        .get(`${NHTSA.proxy}?quest=${NHTSA.endpoint}/modelyear/${this.year}`)
-        .then(response => {
-          this.makes = response.data.Results.map(result => {
-            return {
-              value: result.Make.replace(/&/g,'_'),
-              text: result.Make
-            }
-          })
-        })
-        .catch(error => {
-          console.log(error);
-        })
-    },
-    selected: function() {
-      this.$emit('input', this.selected);
-    }
+const props = defineProps({
+  value: {type: String, default: ''},
+  year: {type: String, default: ''},
+});
+const emit = defineEmits(['input']);
+
+const makes = ref([]);
+const selected = ref('');
+
+watch(() => props.year, () => {
+  if(props.year === '') {
+    makes.value=[];
+    return;
   }
-}
+  selected.value = '';
+  axios
+    .get(`${NHTSA.proxy}?quest=${NHTSA.endpoint}/modelyear/${props.year}`)
+    .then(response => {
+      makes.value = response.data.Results.map(result => {
+        return {
+          value: result.Make.replace(/&/g,'_'),
+          text: result.Make
+        }
+      })
+    })
+    .catch(error => {
+      console.log(error);
+    })
+});
+
+watch(selected, () => {
+  emit('input', selected.value);
+});
+
 </script>
 
 <style>

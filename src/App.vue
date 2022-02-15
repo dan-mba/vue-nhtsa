@@ -1,8 +1,6 @@
 <template>
   <main>
-    <h1
-      class="text-center text-bold my-3"
-    >
+    <h1 class="text-center text-bold my-3">
       NHTSA Safety Ratings Database
     </h1>
     <div class="flex justify-content-center flex-row flex-wrap">
@@ -27,7 +25,8 @@
   </main>
 </template>
 
-<script>
+<script setup>
+import {ref, watch} from 'vue';
 import NHTSA from './constants/endpoints';
 import axios from 'axios';
 import YearSelect from './components/YearSelect';
@@ -36,89 +35,76 @@ import ModelSelect from './components/ModelSelect';
 import DescSelect from './components/DescSelect';
 import DisplayVehicle from './components/DisplayVehicle';
 
-export default {
-  name: 'App',
-  components: {
-    YearSelect,
-    MakeSelect,
-    ModelSelect,
-    DescSelect,
-    DisplayVehicle,
-  },
-  data() {
-    return {
-      year: "",
-      make: "",
-      model: "",
-      vehId: "",
-      vehicle: null
-    }
-  },
-  watch: {
-    year: function (){
-      this.make="";
-      this.model="";
-      this.vehId="";
-    },
-    make: function (){
-      this.model="";
-      this.vehId="";
-    },
-    model: function (){
-      this.vehId="";
-    },
-    vehId: function (){
-      this.getData();
-    }
-  },
-  methods: {
-    getData: function (){
-      if(this.vehId === "") {
-        this.vehicle = null;
-        return;
-      }
-      axios
-        .get(`${NHTSA.proxy}?quest=${NHTSA.endpoint}/VehicleId/${this.vehId}`)
-        .then(response => {
-          const data = response.data.Results[0];
-          this.vehicle = {
-            description: data.VehicleDescription,
-            picture: data.hasOwnProperty('VehiclePicture') ?
-              data.VehiclePicture : "",
-            overallRating: parseInt(data.OverallRating,10),
-            rolloverRating: parseInt(data.RolloverRating, 10),
-            rolloverPossibility: data.RolloverPossibility,
-            nhtsaVars: Object.keys(data).filter(key => key.indexOf("NHTSA") === 0)
-                        .map(key => key.match(/[A-Z][a-z]+/g).join(" ") + ': ' + data[key]),
-            complaints: data.ComplaintsCount,
-            recalls: data.RecallsCount,
-            investigations: data.InvestigationCount,
-            crashRatings: data.FrontCrashDriversideRating != "Not Rated"
-          };
-          if (this.vehicle.crashRatings) {
-            this.vehicle = {
-              frontCrashPic: data.hasOwnProperty('FrontCrashPicture') ?
-                data.FrontCrashPicture : "",
-              frontCrashRating: parseInt(data.OverallFrontCrashRating,10),
-              driverSideRating: parseInt(data.FrontCrashDriversideRating,10),
-              passengerSideRating: parseInt(data.FrontCrashPassengersideRating,10),
-              sideCrashPicture: data.hasOwnProperty('SideCrashPicture') ?
-                data.SideCrashPicture : "",
-              sideCrashRating: parseInt(data.OverallSideCrashRating,10),
-              sideDriverSideRating: parseInt(data.SideCrashDriversideRating,10),
-              sidePassengerSideRating: parseInt(data.SideCrashPassengersideRating,10),
-              sidePolePicture: data.hasOwnProperty('SidePolePicture') ?
-                data.SidePolePicture : "",
-              sidePoleCrashRating: parseInt(data.SidePoleCrashRating,10),
-              ...this.vehicle
-            };
-          }
-        })
-        .catch(error => {
-          console.log(error);
-        })
-    }
+const year = ref('');
+const make = ref('');
+const model = ref('');
+const vehId = ref('');
+const vehicle = ref(null);
+
+watch(year, () => {
+  make.value = '';
+  model.value = '';
+  vehId.value = '';
+});
+
+watch(make, () => {
+  model.value = '';
+  vehId.value = '';
+});
+
+watch(model, () => {
+  vehId.value = '';
+});
+
+watch(vehId, () => {
+  getData();
+});
+
+function getData() {
+  if(vehId.value === '') {
+    vehicle.value = null;
+    return;
   }
+  axios
+    .get(`${NHTSA.proxy}?quest=${NHTSA.endpoint}/VehicleId/${vehId.value}`)
+    .then(response => {
+      const data = response.data.Results[0];
+      vehicle.value = {
+        description: data.VehicleDescription,
+        picture: data.hasOwnProperty('VehiclePicture') ?
+          data.VehiclePicture : "",
+        overallRating: parseInt(data.OverallRating,10),
+        rolloverRating: parseInt(data.RolloverRating, 10),
+        rolloverPossibility: data.RolloverPossibility,
+        nhtsaVars: Object.keys(data).filter(key => key.indexOf("NHTSA") === 0)
+                    .map(key => key.match(/[A-Z][a-z]+/g).join(" ") + ': ' + data[key]),
+        complaints: data.ComplaintsCount,
+        recalls: data.RecallsCount,
+        investigations: data.InvestigationCount,
+        crashRatings: data.FrontCrashDriversideRating != "Not Rated"
+      };
+      if (vehicle.value.crashRatings) {
+        vehicle.value = {
+          frontCrashPic: data.hasOwnProperty('FrontCrashPicture') ?
+            data.FrontCrashPicture : "",
+          frontCrashRating: parseInt(data.OverallFrontCrashRating,10),
+          driverSideRating: parseInt(data.FrontCrashDriversideRating,10),
+          passengerSideRating: parseInt(data.FrontCrashPassengersideRating,10),
+          sideCrashPicture: data.hasOwnProperty('SideCrashPicture') ?
+            data.SideCrashPicture : "",
+          sideCrashRating: parseInt(data.OverallSideCrashRating,10),
+          sideDriverSideRating: parseInt(data.SideCrashDriversideRating,10),
+          sidePassengerSideRating: parseInt(data.SideCrashPassengersideRating,10),
+          sidePolePicture: data.hasOwnProperty('SidePolePicture') ?
+            data.SidePolePicture : "",
+          sidePoleCrashRating: parseInt(data.SidePoleCrashRating,10),
+          ...vehicle.value
+        };
+      }
+    })
+    .catch(error => {
+      console.log(error);
+    })
 }
 </script>
 

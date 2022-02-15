@@ -6,13 +6,11 @@
   />
 </template>
 
-<script>
-export default {
-  name: 'Stars',
-  props: {
-    stars: {type: Number, default: 0},
-  }
-}
+<script setup>
+import {defineProps} from 'vue';
+defineProps({
+  stars: {type: Number, default: 0},
+});
 </script>
 
 <style>

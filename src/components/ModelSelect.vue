@@ -10,62 +10,57 @@
   />
 </template>
 
-<script>
+<script setup>
+import {ref, watch, defineProps, defineEmits} from 'vue';
 import NHTSA from '../constants/endpoints';
 import axios from 'axios';
 
-export default {
-  name: 'ModelSelect',
-  props: {
+const props = defineProps({
     value: {type: String, default: ''},
     year: {type: String, default: ''},
     make: {type: String, default: ''},
-  },
-  emits: ['input'],
-  data (){
-    return {
-      models: [],
-      selected: ""
-    }
-  },
-  watch: {
-    year: function (){
-      if((this.year === "") || (this.make === "")) {
-        this.models=[];
-        return;
-      }
-      this.selected="";
-      this.getData();
-    },
-    make: function (){
-      if((this.year === "") || (this.make === "")) {
-        this.models=[];
-        return;
-      }
-      this.selected="";
-      this.getData();
-    },
-    selected: function() {
-      this.$emit('input', this.selected);
-    }
-  },
-  methods: {
-    getData: function (){
-      axios
-        .get(`${NHTSA.proxy}?quest=${NHTSA.endpoint}/modelyear/${this.year}/make/${this.make}`)
-        .then(response => {
-          this.models = response.data.Results.map(result => {
-            return {
-              value: result.Model.replace(/&/g,'_'),
-              text: result.Model
-            }
-          })
-        })
-        .catch(error => {
-          console.log(error);
-        })
-    }
+});
+
+const emit = defineEmits(['input']);
+const models = ref([]);
+const selected = ref('');
+
+watch(() => props.year, () => {
+  if((props.year === '') || (props.make === '')) {
+    models.value=[];
+    return;
   }
+  selected.value = '';
+  getData();
+});
+
+watch(() => props.make, () => {
+  if((props.year === '') || (props.make === '')) {
+    models.value=[];
+    return;
+  }
+  selected.value = '';
+  getData();
+});
+
+watch (selected, () => {
+  emit('input', selected.value);
+});
+
+function getData() {
+  axios
+    .get(`${NHTSA.proxy}?quest=${NHTSA.endpoint}/modelyear/${props.year}/make/${props.make}`)
+    .then(response => {
+      models.value = response.data.Results.map(result => {
+        return {
+          value: result.Model.replace(/&/g,'_'),
+          text: result.Model
+        }
+      })
+    })
+    .catch(error => {
+      console.log(error);
+    })
 }
 </script>
 

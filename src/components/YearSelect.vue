@@ -10,41 +10,36 @@
   />
 </template>
 
-<script>
+<script setup>
+import {ref, watch, defineProps, defineEmits, onMounted} from 'vue';
 import NHTSA from '../constants/endpoints';
 import axios from 'axios';
 
-export default {
-  name: 'YearSelect',
-  props: {
-    value: {type: String, default: ''}
-  },
-  emits: ['input'],
-  data (){
-    return {
-      years: [],
-      selected: ""
-    }
-  },
-  watch: {
-    selected: function(){
-      this.$emit('input', this.selected.toString());
-    }
-  },
-  mounted (){
-    axios
-      .get(`${NHTSA.proxy}?quest=${NHTSA.endpoint}`)
-      .then(response => {
-        console
-        this.years = response.data.Results.map(result => {
-          return {value: `${result.ModelYear}`}
-        });
-      })
-      .catch(error => {
-        console.log(error);
-      })
-  }
-}
+defineProps({
+  value: {type: String, default: ''}
+});
+const emit = defineEmits(['input']);
+
+const years = ref([]);
+const selected = ref('');
+
+watch(selected, () => {
+  emit('input', selected.value.toString());
+});
+
+onMounted(() => {
+  axios
+    .get(`${NHTSA.proxy}?quest=${NHTSA.endpoint}`)
+    .then(response => {
+      console
+      years.value = response.data.Results.map(result => {
+        return {value: `${result.ModelYear}`}
+      });
+    })
+    .catch(error => {
+      console.log(error);
+    })
+});
 </script>
 
 <style>

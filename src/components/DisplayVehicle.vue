@@ -120,38 +120,27 @@
   </div>
 </template>
 
-<script>
+<script setup>
+import {defineProps, computed} from 'vue';
 import Stars from './Stars'
 
-export default {
-  name: 'DisplayVehicle',
-  components: {
-    Stars,
-  },
-  props: {
-    vehicle: {type: Object, default: () => {return {}}}
-  },
-  computed: {
-    main(){
-      return this.vehicle.overallRating || this.vehicle.rolloverRating
-    },
-    front(){
-      return this.vehicle.frontCrashPic || this.vehicle.frontCrashRating ||
-        this.vehicle.driverSideRating || this.vehicle.passengerSideRating;
-    },
-    side(){
-      return this.vehicle.sideCrashPic || this.vehicle.sideCrashRating ||
-        this.vehicle.sideDriverSideRating || this.vehicle.sidePassengerSideRating;
-    },
-    pole(){
-      return this.vehicle.sidePolePicture || this.vehicle.sidePoleCrashRating;
-    },
-    rolloverPercent(){
-      const p = this.vehicle.rolloverPossibility*100;
-      return `${p.toFixed(2)}%`;
-    }
-  }
-}
+const props = defineProps({
+  vehicle: {type: Object, default: () => {return {}}}
+});
+const main = computed(() => props.vehicle.overallRating || props.vehicle.rolloverRating);
+const front = computed(() => {
+  return props.vehicle.frontCrashPic || props.vehicle.frontCrashRating ||
+    props.vehicle.driverSideRating || props.vehicle.passengerSideRating;
+});
+const side = computed(() => {
+  return props.vehicle.sideCrashPic || props.vehicle.sideCrashRating ||
+    props.vehicle.sideDriverSideRating || props.vehicle.sidePassengerSideRating;
+});
+const pole = computed(() => props.vehicle.sidePolePicture || props.vehicle.sidePoleCrashRating);
+const rolloverPercent = computed(() => {
+  const p = props.vehicle.rolloverPossibility*100;
+  return `${p.toFixed(2)}%`;
+});
 </script>
 
 <style>
