@@ -10,69 +10,61 @@
   />
 </template>
 
-<script>
+<script setup>
+import {ref, watch, defineProps, defineEmits} from 'vue';
 import NHTSA from '../constants/endpoints';
 import axios from 'axios';
 
-export default {
-  name: 'DescSelect',
-  props: {
-    value: {type: String, default: ''},
-    year: {type: String, default: ''},
-    make: {type: String, default: ''},
-    model: {type: String, default: ''},
-  },
-  emits: ['input'],
-  data (){
-    return {
-      descriptions: [],
-      selected: ""
-    }
-  },
-  watch: {
-    year: function (){
-      if((this.year === "") || (this.make === "") || (this.model === "")) {
-        this.descriptions=[];
-        return;
-      }
-      this.getData();
-    },
-    make: function (){
-      if((this.year === "") || (this.make === "") || (this.model === "")) {
-        this.descriptions=[];
-        return;
-      }
-      this.getData();
-    },
-    model: function (){
-      if((this.year === "") || (this.make === "") || (this.model === "")) {
-        this.descriptions=[];
-        return;
-      }
-      this.getData();
-    },
-    selected: function (){
-      this.$emit('input', this.selected.toString());
-    }
-  },
-  methods: {
-    getData: function (){
-      this.selected="";
-      axios
-        .get(`${NHTSA.proxy}?quest=${NHTSA.endpoint}/modelyear/${this.year}/make/${this.make}/model/${this.model}`)
-        .then(response => {
-          this.descriptions = response.data.Results.map(result => {
-            return {
-              value: result.VehicleId,
-              text: result.VehicleDescription
-            }
-          })
-        })
-        .catch(error => {
-          console.log(error);
-        })
-    }
+const props = defineProps({
+  value: {type: String, default: ''},
+  year: {type: String, default: ''},
+  make: {type: String, default: ''},
+  model: {type: String, default: ''},
+});
+const emit = defineEmits(['input']);
+const descriptions = ref([]);
+const selected = ref('');
+
+watch(() => props.year, () => {
+  if((props.year === "") || (props.make === "") || (props.model === "")) {
+    descriptions.value=[];
+    return;
   }
+  getData();
+});
+watch(() => props.make, () => {
+  if((props.year === "") || (props.make === "") || (props.model === "")) {
+    descriptions.value=[];
+    return;
+  }
+  getData();
+});    
+watch(() => props.model, () => {
+  if((props.year === "") || (props.make === "") || (props.model === "")) {
+    descriptions.value=[];
+    return;
+  }
+  getData();
+});
+watch (selected, () => {
+  emit('input', selected.value);
+});
+
+function getData() {
+  selected.value = '';
+  axios
+    .get(`${NHTSA.proxy}?quest=${NHTSA.endpoint}/modelyear/${props.year}/make/${props.make}/model/${props.model}`)
+    .then(response => {
+      descriptions.value = response.data.Results.map(result => {
+        return {
+          value: result.VehicleId,
+          text: result.VehicleDescription
+        }
+      })
+    })
+    .catch(error => {
+      console.log(error);
+    })
 }
 </script>
 
