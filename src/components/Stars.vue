@@ -7,7 +7,6 @@
 </template>
 
 <script setup>
-import {defineProps} from 'vue';
 defineProps({
   stars: {type: Number, default: 0},
 });
