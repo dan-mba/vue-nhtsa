@@ -28,7 +28,6 @@
 <script setup>
 import {ref, watch} from 'vue';
 import NHTSA from './constants/endpoints';
-import axios from 'axios';
 import YearSelect from './components/YearSelect';
 import MakeSelect from './components/MakeSelect';
 import ModelSelect from './components/ModelSelect';
@@ -65,10 +64,10 @@ function getData() {
     vehicle.value = null;
     return;
   }
-  axios
-    .get(`${NHTSA.proxy}?quest=${NHTSA.endpoint}/VehicleId/${vehId.value}`)
+  fetch(`${NHTSA.proxy}?quest=${NHTSA.endpoint}/VehicleId/${vehId.value}`)
+    .then(res => res.json())
     .then(response => {
-      const data = response.data.Results[0];
+      const data = response.Results[0];
       vehicle.value = {
         description: data.VehicleDescription,
         picture: data.hasOwnProperty('VehiclePicture') ?

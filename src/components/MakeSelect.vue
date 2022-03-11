@@ -13,7 +13,6 @@
 <script setup>
 import {ref, watch} from 'vue';
 import NHTSA from '../constants/endpoints';
-import axios from 'axios';
 
 const props = defineProps({
   value: {type: String, default: ''},
@@ -30,10 +29,10 @@ watch(() => props.year, () => {
     return;
   }
   selected.value = '';
-  axios
-    .get(`${NHTSA.proxy}?quest=${NHTSA.endpoint}/modelyear/${props.year}`)
+  fetch(`${NHTSA.proxy}?quest=${NHTSA.endpoint}/modelyear/${props.year}`)
+    .then(res => res.json())
     .then(response => {
-      makes.value = response.data.Results.map(result => {
+      makes.value = response.Results.map(result => {
         return {
           value: result.Make.replace(/&/g,'_'),
           text: result.Make
