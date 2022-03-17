@@ -13,7 +13,6 @@
 <script setup>
 import {ref, watch, onMounted} from 'vue';
 import NHTSA from '../constants/endpoints';
-import axios from 'axios';
 
 defineProps({
   value: {type: String, default: ''}
@@ -28,11 +27,10 @@ watch(selected, () => {
 });
 
 onMounted(() => {
-  axios
-    .get(`${NHTSA.proxy}?quest=${NHTSA.endpoint}`)
+  fetch(`${NHTSA.proxy}?quest=${NHTSA.endpoint}`)
+    .then(res => res.json())
     .then(response => {
-      console
-      years.value = response.data.Results.map(result => {
+      years.value = response.Results.map(result => {
         return {value: `${result.ModelYear}`}
       });
     })
