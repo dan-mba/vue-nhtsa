@@ -13,10 +13,10 @@ defineProps({
 </script>
 
 <style>
-.p-rating {
+div.p-rating {
   display: inline;
 }
-div.p-rating .p-rating-icon {
+div.p-rating .p-rating-item .p-rating-icon {
   margin-left: .25rem;
   font-size: 1rem;
 }
