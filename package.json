@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "primeflex": "^3.2.1",
-    "primeicons": "^5.0.0",
+    "primeicons": "^6.0.1",
     "primevue": "^3.18.0",
     "vue": "^3.2.41"
   },
