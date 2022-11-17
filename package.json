@@ -8,7 +8,7 @@
     "lint": "eslint src"
   },
   "dependencies": {
-    "primeflex": "^3.2.1",
+    "primeflex": "^3.3.0",
     "primeicons": "^6.0.1",
     "primevue": "^3.18.1",
     "vue": "^3.2.45"
