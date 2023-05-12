@@ -156,7 +156,7 @@ img {
 }
 
 .ratings, .sm-card .p-card-content {
-  width: 14em;
+  width: 14rem;
   margin: 0 auto;
 }
 

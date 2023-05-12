@@ -17,7 +17,7 @@ div.p-rating {
   display: inline;
 }
 div.p-rating .p-rating-item .p-rating-icon {
-  margin-left: .25rem;
+  margin-left: .2rem;
   font-size: 1rem;
 }
 </style>
