@@ -27,7 +27,7 @@
 
 <script setup>
 import {ref, watch} from 'vue';
-import NHTSA from './constants/endpoints';
+import getUrl from './constants/endpoints';
 import YearSelect from './components/YearSelect';
 import MakeSelect from './components/MakeSelect';
 import ModelSelect from './components/ModelSelect';
@@ -64,7 +64,7 @@ function getData() {
     vehicle.value = null;
     return;
   }
-  fetch(`${NHTSA.proxy}?quest=${NHTSA.endpoint}/VehicleId/${vehId.value}`)
+  fetch(getUrl(`/VehicleId/${vehId.value}`))
     .then(res => res.json())
     .then(response => {
       const data = response.Results[0];

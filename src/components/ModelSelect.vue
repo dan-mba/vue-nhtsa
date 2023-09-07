@@ -12,7 +12,7 @@
 
 <script setup>
 import {ref, watch} from 'vue';
-import NHTSA from '../constants/endpoints';
+import getUrl from '../constants/endpoints';
 
 const props = defineProps({
     value: {type: String, default: ''},
@@ -47,12 +47,12 @@ watch (selected, () => {
 });
 
 function getData() {
-  fetch(`${NHTSA.proxy}?quest=${NHTSA.endpoint}/modelyear/${props.year}/make/${props.make}`)
+  fetch(getUrl(`/modelyear/${props.year}/make/${props.make}`))
     .then(res => res.json())
     .then(response => {
       models.value = response.Results.map(result => {
         return {
-          value: result.Model.replace(/&/g,'_'),
+          value: result.Model.replace(/&/g,'_').replace(/ /g,'%20'),
           text: result.Model
         }
       })

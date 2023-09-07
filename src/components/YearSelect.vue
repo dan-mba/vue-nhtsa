@@ -12,7 +12,7 @@
 
 <script setup>
 import {ref, watch, onMounted} from 'vue';
-import NHTSA from '../constants/endpoints';
+import getUrl from '../constants/endpoints';
 
 defineProps({
   value: {type: String, default: ''}
@@ -27,7 +27,7 @@ watch(selected, () => {
 });
 
 onMounted(() => {
-  fetch(`${NHTSA.proxy}?quest=${NHTSA.endpoint}`)
+  fetch(getUrl(''))
     .then(res => res.json())
     .then(response => {
       years.value = response.Results.map(result => {

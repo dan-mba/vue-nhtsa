@@ -1,5 +1,6 @@
-const NHTSA = {
-  endpoint: 'api.nhtsa.gov/SafetyRatings',
-  proxy: 'https://api.codetabs.com/v1/proxy/'
-};
-export default NHTSA;
+const endpoint = 'https://api.nhtsa.gov/SafetyRatings';
+const proxy = 'https://corsproxy.io/?';
+
+export default function getUrl (URLPart){
+  return proxy + encodeURIComponent(`${endpoint}${URLPart}`);
+}
