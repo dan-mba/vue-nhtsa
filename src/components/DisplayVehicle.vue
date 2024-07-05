@@ -3,9 +3,9 @@
     v-if="vehicle"
     id="vehicle"
   >
-    <div class="grid justify-content-center mt-3">
-      <div class="col-12 mb-3">
-        <h2 class="text-center font-weight-bold mb-3">
+    <div class="grid grid-cols-12 gap-4 justify-center mt-4">
+      <div class="col-span-12 mb-4">
+        <h2 class="text-center text-2xl font-bold mb-4">
           {{ vehicle.description }}
         </h2>
         <img
@@ -19,7 +19,7 @@
 
       <div
         v-if="main"
-        class="col-10 md:col-4"
+        class="col-span-10 md:col-span-4"
       >
         <Card class="sm-card">
           <template #content>
@@ -31,7 +31,7 @@
       </div>
       <div
         v-if="vehicle.nhtsaVars.length"
-        class="col-10 md:col-4"
+        class="col-span-10 md:col-span-4"
       >
         <Card>
           <template #content>
@@ -44,7 +44,7 @@
           </template>
         </Card>
       </div>
-      <div class="col-10 md:col-4">
+      <div class="col-span-10 md:col-span-4">
         <Card class="sm-card">
           <template #content>
             <div>Complaints: {{ vehicle.complaints }}</div>
@@ -56,12 +56,12 @@
       <div
         v-if="vehicle.crashRatings"
         id="crash"
-        class="col-12"
+        class="col-span-12"
       >
-        <div class="grid justify-content-center mt-md-2">
+        <div class="grid grid-cols-12 gap-4 justify-center mt-md-2">
           <div
             v-if="front"
-            class="col-10 md:col-4"
+            class="col-span-10 md:col-span-4"
           >
             <Card>
               <template #content>
@@ -80,7 +80,7 @@
           </div>
           <div
             v-if="side"
-            class="col-10 md:col-4"
+            class="col-span-10 md:col-span-4"
           >
             <Card>
               <template #content>
@@ -99,7 +99,7 @@
           </div>
           <div
             v-if="pole"
-            class="col-10 md:col-4"
+            class="col-span-10 md:col-span-4"
           >
             <Card>
               <template #content>
@@ -150,6 +150,8 @@ img {
 .main-img {
   max-height: 35vh;
 }
+
+@layer primevue {
 .p-card {
   height: 100%;
   width: 100%;
@@ -159,5 +161,5 @@ img {
   width: 14rem;
   margin: 0 auto;
 }
-
+}
 </style>

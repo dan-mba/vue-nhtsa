@@ -1,9 +1,11 @@
 <template>
-  <Rating
-    :model-value="stars"
-    :readonly="true"
-    :cancel="false"
-  />
+  <span>
+    <Rating
+      :model-value="stars"
+      :readonly="true"
+      :cancel="false"
+    />
+  </span>
 </template>
 
 <script setup>
@@ -13,11 +15,13 @@ defineProps({
 </script>
 
 <style>
-div.p-rating {
-  display: inline;
-}
-div.p-rating .p-rating-item .p-rating-icon {
-  margin-left: .2rem;
-  font-size: 1rem;
+@layer primevue {
+  div.p-rating {
+    display: inline;
+  }
+  div.p-rating .p-rating-option .p-rating-icon {
+    margin-left: .2rem;
+    font-size: 1rem;
+  }
 }
 </style>

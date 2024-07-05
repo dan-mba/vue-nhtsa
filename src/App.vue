@@ -1,9 +1,9 @@
 <template>
   <main>
-    <h1 class="text-center text-bold my-3">
+    <h1 class="text-center text-3xl font-bold my-4">
       NHTSA Safety Ratings Database
     </h1>
-    <div class="flex justify-content-center flex-row flex-wrap">
+    <div class="flex justify-center flex-row flex-wrap">
       <YearSelect v-model="year" />
       <MakeSelect
         v-model="make"
