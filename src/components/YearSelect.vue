@@ -6,7 +6,8 @@
     option-label="value"
     option-value="value"
     placeholder="Year"
-    class="year m-1"
+    class="grow-0 shrink-0 basis-[90px] m-1"
+    :pt="{label: 'p-2'}"
   />
 </template>
 
@@ -39,9 +40,3 @@ onMounted(() => {
     })
 });
 </script>
-
-<style>
-div.year {
-  flex: 0 0 90px;
-}
-</style>

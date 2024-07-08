@@ -6,7 +6,8 @@
     option-label="text"
     option-value="value"
     placeholder="Vehicle Description"
-    class="desc m-1"
+    class="grow-0 shrink-0 basis-[320px] m-1"
+    :pt="{label: 'p-2'}"
   />
 </template>
 
@@ -66,9 +67,3 @@ function getData() {
     })
 }
 </script>
-
-<style>
-div.desc {
-  flex: 0 0 320px;
-}
-</style>

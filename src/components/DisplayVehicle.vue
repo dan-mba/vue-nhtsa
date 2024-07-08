@@ -1,8 +1,5 @@
 <template>
-  <div
-    v-if="vehicle"
-    id="vehicle"
-  >
+  <div v-if="vehicle" id="vehicle">
     <div class="grid grid-cols-12 gap-4 justify-center mt-4">
       <div class="col-span-12 mb-4">
         <h2 class="text-center text-2xl font-bold mb-4">
@@ -13,14 +10,11 @@
           :v-if="vehicle.picture"
           :src="vehicle.picture"
           alt=" "
-          class="mx-auto block main-img"
+          class="mx-auto block max-h-[35vh]"
         >
       </div>
 
-      <div
-        v-if="main"
-        class="col-span-10 md:col-span-4"
-      >
+      <div v-if="main" class="col-span-10 md:col-span-4">
         <Card class="sm-card">
           <template #content>
             <div>Overall: <Stars :stars="vehicle.overallRating" /></div>
@@ -29,16 +23,10 @@
           </template>
         </Card>
       </div>
-      <div
-        v-if="vehicle.nhtsaVars.length"
-        class="col-span-10 md:col-span-4"
-      >
+      <div v-if="vehicle.nhtsaVars.length" class="col-span-10 md:col-span-4">
         <Card>
           <template #content>
-            <div
-              v-for="(feature, index) in vehicle.nhtsaVars"
-              :key="index"
-            >
+            <div v-for="(feature, index) in vehicle.nhtsaVars" :key="index">
               {{ feature }}
             </div>
           </template>
@@ -70,7 +58,7 @@
                   alt=" "
                   class="block mx-auto mb-2"
                 >
-                <div class="ratings">
+                <div class="mx-auto my-0 w-56">
                   <div>Front Crash: <Stars :stars="vehicle.frontCrashRating" /></div>
                   <div>Driver Side: <Stars :stars="vehicle.driverSideRating" /></div>
                   <div>Passenger Side: <Stars :stars="vehicle.passengerSideRating" /></div>
@@ -108,7 +96,7 @@
                   alt=" "
                   class="block mx-auto mb-2"
                 >
-                <div class="ratings">
+                <div class="mx-auto my-0 w-56">
                   Side Pole Crash: <Stars :stars="vehicle.sidePoleCrashRating" />
                 </div>
               </template>
@@ -147,9 +135,6 @@ const rolloverPercent = computed(() => {
 img {
   max-width: min(100%, 450px);
 }
-.main-img {
-  max-height: 35vh;
-}
 
 @layer primevue {
 .p-card {
@@ -157,7 +142,7 @@ img {
   width: 100%;
 }
 
-.ratings, .sm-card .p-card-content {
+.sm-card .p-card-content {
   width: 14rem;
   margin: 0 auto;
 }

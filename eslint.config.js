@@ -12,7 +12,9 @@ export default [
       'no-console': 'off',
       'no-prototype-builtins': 'off',
       'vue/multi-word-component-names': 'off',
-      'vue/attribute-hyphenation': 'off'
+      'vue/attribute-hyphenation': 'off',
+      'vue/first-attribute-linebreak': 'off',
+      'vue/max-attributes-per-line': 'off'
     }
   }
 ]
