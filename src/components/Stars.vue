@@ -3,6 +3,7 @@
     :model-value="stars"
     :readonly="true"
     :cancel="false"
+    :pt="{root: 'inline', onicon: 'ml-1 text-base', officon: 'ml-1 text-base'}"
   />
 </template>
 
@@ -11,13 +12,3 @@ defineProps({
   stars: {type: Number, default: 0},
 });
 </script>
-
-<style>
-div.p-rating {
-  display: inline;
-}
-div.p-rating .p-rating-item .p-rating-icon {
-  margin-left: .2rem;
-  font-size: 1rem;
-}
-</style>

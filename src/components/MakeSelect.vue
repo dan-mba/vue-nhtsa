@@ -6,7 +6,8 @@
     option-label="text"
     option-value="value"
     placeholder="Make"
-    class="make m-1"
+    class="grow-0 shrink-0 basis-[210px] m-1"
+    :pt="{label: 'p-2'}"
   />
 </template>
 
@@ -47,11 +48,4 @@ watch(() => props.year, () => {
 watch(selected, () => {
   emit('input', selected.value);
 });
-
 </script>
-
-<style>
-div.make {
-  flex: 0 0 210px;
-}
-</style>

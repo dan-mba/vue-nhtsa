@@ -1,25 +1,13 @@
 <template>
-  <main>
-    <h1 class="text-center text-bold my-3">
+  <main class="w-[98%] mx-auto my-0">
+    <h1 class="text-center text-3xl font-bold my-4">
       NHTSA Safety Ratings Database
     </h1>
-    <div class="flex justify-content-center flex-row flex-wrap">
+    <div class="flex justify-center flex-row flex-wrap">
       <YearSelect v-model="year" />
-      <MakeSelect
-        v-model="make"
-        :year="year"
-      />
-      <ModelSelect
-        v-model="model"
-        :year="year"
-        :make="make"
-      />
-      <DescSelect
-        v-model="vehId"
-        :year="year"
-        :make="make"
-        :model="model"
-      />
+      <MakeSelect v-model="make" :year="year" />
+      <ModelSelect v-model="model" :year="year" :make="make" />
+      <DescSelect v-model="vehId" :year="year" :make="make" :model="model" />
     </div>
     <DisplayVehicle :vehicle="vehicle" />
   </main>
@@ -106,10 +94,3 @@ function getData() {
     })
 }
 </script>
-
-<style>
-main {
-  width: 98%;
-  margin: 0 auto;
-}
-</style>

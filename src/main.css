@@ -1,16 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
 @layer primevue {
   * {
     margin: 0;
     padding: 0;
     border: 0;
     outline: 0;
+    line-height: normal;
   }
 }
 
 body {
   max-width: 900px;
-  margin: 0 auto;
-  background-color: var(--surface-b);
-  color: var(--text-color);
-  font-family: var(--font-family);
+  margin: 0 auto 1rem;
 }

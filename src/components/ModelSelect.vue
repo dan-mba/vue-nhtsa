@@ -6,7 +6,8 @@
     option-label="text"
     option-value="value"
     placeholder="Model"
-    class="model m-1"
+    class="grow-0 shrink-0 basis-[300px] m-1"
+    :pt="{label: 'p-2'}"
   />
 </template>
 
@@ -62,9 +63,3 @@ function getData() {
     })
 }
 </script>
-
-<style>
-div.model {
-  flex: 0 0 300px;
-}
-</style>
