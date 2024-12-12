@@ -3,7 +3,7 @@ import App from './App';
 import PrimeVue from 'primevue/config';
 import {definePreset} from '@primevue/themes';
 import Aura from '@primevue/themes/aura';
-import Dropdown from 'primevue/dropdown';
+import Select from 'primevue/select';
 import Card from 'primevue/card';
 import Rating from 'primevue/rating';
 import './main.css';
@@ -42,7 +42,7 @@ app.use(PrimeVue, {
     }
   }
 });
-app.component('Dropdown', Dropdown);
+app.component('Dropdown', Select);
 app.component('Card', Card);
 app.component('Rating', Rating);
 
