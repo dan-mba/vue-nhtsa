@@ -6,7 +6,7 @@
     option-label="value"
     option-value="value"
     placeholder="Year"
-    class="grow-0 shrink-0 basis-[90px] m-1"
+    class="grow-0 shrink-0 basis-[90px] m-1 dark:border-transparent"
     :pt="{label: 'p-2'}"
   />
 </template>
