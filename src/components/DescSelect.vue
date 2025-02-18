@@ -6,7 +6,7 @@
     option-label="text"
     option-value="value"
     placeholder="Vehicle Description"
-    class="grow-0 shrink-0 basis-[320px] m-1"
+    class="grow-0 shrink-0 basis-[320px] m-1 dark:border-transparent"
     :pt="{label: 'p-2'}"
   />
 </template>
