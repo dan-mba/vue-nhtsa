@@ -21,7 +21,7 @@
     "eslint": "^9.21.0",
     "eslint-plugin-vue": "^9.32.0",
     "tailwindcss": "^4.0.7",
-    "tailwindcss-primeui": "^0.4.0",
+    "tailwindcss-primeui": "^0.5.1",
     "vite": "^6.2.0",
     "vite-plugin-html": "^3.2.2"
   },
