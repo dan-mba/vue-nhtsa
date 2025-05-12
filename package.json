@@ -9,7 +9,7 @@
     "lint": "eslint src"
   },
   "dependencies": {
-    "@primeuix/themes": "^1.0.3",
+    "@primeuix/themes": "^1.1.1",
     "primeicons": "^7.0.0",
     "primevue": "^4.3.1",
     "vue": "^3.5.13"
