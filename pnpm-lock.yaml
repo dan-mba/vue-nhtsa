@@ -25,8 +25,8 @@ importers:
         specifier: ^4.1.18
         version: 4.1.18(vite@7.2.6(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.44.1))
       '@vitejs/plugin-vue':
-        specifier: ^6.0.2
-        version: 6.0.2(vite@7.2.6(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.44.1))(vue@3.5.25)
+        specifier: ^6.0.3
+        version: 6.0.3(vite@7.2.6(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.44.1))(vue@3.5.25)
       eslint:
         specifier: ^9.39.2
         version: 9.39.2(jiti@2.6.1)
@@ -330,8 +330,8 @@ packages:
     resolution: {integrity: sha512-KVjtxAiTnyVmXhrjMlnDJqL6p33rnI4O5RSQbg7TwnFVXYaanVmjHZOQ2uq2euImleaRYeePuXBHGMPEGxOxYg==}
     engines: {node: '>=12.11.0'}
 
-  '@rolldown/pluginutils@1.0.0-beta.50':
-    resolution: {integrity: sha512-5e76wQiQVeL1ICOZVUg4LSOVYg9jyhGCin+icYozhsUzM+fHE7kddi1bdiE0jwVqTfkjba3jUFbEkoC9WkdvyA==}
+  '@rolldown/pluginutils@1.0.0-beta.53':
+    resolution: {integrity: sha512-vENRlFU4YbrwVqNDZ7fLvy+JR1CRkyr01jhSiDpE1u6py3OMzQfztQU2jxykW3ALNxO4kSlqIDeYyD0Y9RcQeQ==}
 
   '@rollup/pluginutils@4.2.1':
     resolution: {integrity: sha512-iKnFXr7NkdZAIHiIWE+BX5ULi/ucVFYWD6TbAV+rZctiRTY2PL6tsIKhoIOaoskiWAkgu+VsbXgUVDNLHf+InQ==}
@@ -558,11 +558,11 @@ packages:
   '@types/json-schema@7.0.15':
     resolution: {integrity: sha512-5+fP8P8MFNC+AyZCDxrB2pkZFPGzqQWUzpSeuuVLvm8VMcorNYavBqoFcxK8bQz4Qsbn4oUEEem4wDLfcysGHA==}
 
-  '@vitejs/plugin-vue@6.0.2':
-    resolution: {integrity: sha512-iHmwV3QcVGGvSC1BG5bZ4z6iwa1SOpAPWmnjOErd4Ske+lZua5K9TtAVdx0gMBClJ28DViCbSmZitjWZsWO3LA==}
+  '@vitejs/plugin-vue@6.0.3':
+    resolution: {integrity: sha512-TlGPkLFLVOY3T7fZrwdvKpjprR3s4fxRln0ORDo1VQ7HHyxJwTlrjKU3kpVWTlaAjIEuCTokmjkZnr8Tpc925w==}
     engines: {node: ^20.19.0 || >=22.12.0}
     peerDependencies:
-      vite: ^5.0.0 || ^6.0.0 || ^7.0.0
+      vite: ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0-0
       vue: ^3.2.25
 
   '@vue/compiler-core@3.5.25':
@@ -1542,7 +1542,7 @@ snapshots:
     transitivePeerDependencies:
       - vue
 
-  '@rolldown/pluginutils@1.0.0-beta.50': {}
+  '@rolldown/pluginutils@1.0.0-beta.53': {}
 
   '@rollup/pluginutils@4.2.1':
     dependencies:
@@ -1687,9 +1687,9 @@ snapshots:
 
   '@types/json-schema@7.0.15': {}
 
-  '@vitejs/plugin-vue@6.0.2(vite@7.2.6(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.44.1))(vue@3.5.25)':
+  '@vitejs/plugin-vue@6.0.3(vite@7.2.6(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.44.1))(vue@3.5.25)':
     dependencies:
-      '@rolldown/pluginutils': 1.0.0-beta.50
+      '@rolldown/pluginutils': 1.0.0-beta.53
       vite: 7.2.6(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.44.1)
       vue: 3.5.25
 
