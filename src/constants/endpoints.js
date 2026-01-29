@@ -1,5 +1,5 @@
 const endpoint = 'https://api.nhtsa.gov/SafetyRatings';
-const proxy = 'https://cors-proxy.htmldriven.com/?url=';
+const proxy = 'https://api.allorigins.win/get?url=';
 
 export default function getUrl (URLPart){
   return proxy + encodeURIComponent(`${endpoint}${URLPart}`);
