@@ -1,5 +1,5 @@
 const endpoint = 'https://api.nhtsa.gov/SafetyRatings';
-const proxy = 'https://test.cors.workers.dev/?';
+const proxy = 'https://api.cors.lol/?url=';
 
 export default function getUrl (URLPart){
   return proxy + encodeURIComponent(`${endpoint}${URLPart}`);
