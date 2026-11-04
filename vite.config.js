@@ -1,12 +1,12 @@
 import {defineConfig} from 'vite';
 import vue from '@vitejs/plugin-vue';
-import {createHtmlPlugin} from 'vite-plugin-html';
+import { ViteMinifyPlugin } from 'vite-plugin-minify';
 import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
   plugins: [
     vue(),
-    createHtmlPlugin(),
+    ViteMinifyPlugin({}),
     tailwindcss()
   ],
   server: {
